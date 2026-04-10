@@ -68,14 +68,16 @@
   "executive_summary_en": "English executive summary. Summarize the key findings in 3-4 sentences. (150 words max)"
 }}
 
-# Constraints
+# Constraints — 质量红线
 - hot_events 数量 = {top_k}
-- 每条 hot_event 的 summary 必须是2-3句完整的分析性句子，不能只是一句话复述标题
+- 每条 hot_event 的 summary 必须是2-3句完整的分析性句子，禁止只复述标题
 - 每条 hot_event 的 background 必须解释读者可能不熟悉的专业术语或背景信息
 - 每条 hot_event 的 tags 包含3-5个相关话题标签，以 # 开头
 - 每条 hot_event 的 reference_links 包含2-4条相关资源的文字描述（无需真实URL，只需描述性标题）
-- deep_dives 只选最重要的 1-2 个事件
-- trend_insights 至少 1 条，最多 3 条
-- 所有分析必须有数据支撑，引用具体事件名称
-- 不要编造数据或事件
-- executive_summary_en 必须是自然的英文，不是中文直译
+- deep_dives 只选最重要的 1-2 个事件，key_findings 至少 3 条
+- trend_insights 至少 2 条，最多 4 条；每条必须覆盖具体的技术/应用/政策/资本方向之一
+- risks_and_opportunities 至少 2 条（至少 1 risk + 1 opportunity）
+- **禁止空洞描述**：每一段分析必须引用至少一个具体事件名称、数字或技术术语作为支撑依据
+- 禁止编造数据或事件；所有判断须来自 context data 中存在的内容
+- executive_summary_zh 先给出今日最核心事件，再点出2-3个结构性趋势，最后提示1个风险或机会
+- executive_summary_en 必须是自然流畅的英文，不是中文直译
