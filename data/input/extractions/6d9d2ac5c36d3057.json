@@ -1,0 +1,26 @@
+{
+  "article_id": "e7a08690",
+  "title": "OpenAI raises $122 billion to accelerate the next phase of AI",
+  "category": "政策合规",
+  "core_entities": [
+    "OpenAI",
+    "Microsoft",
+    "AI",
+    "Amazon",
+    "Nvidia",
+    "SoftBank"
+  ],
+  "structured_analysis": {
+    "background": "OpenAI Blog 于 2026-03-31 发布相关动态。",
+    "key_action": "OpenAI closed its latest funding round with $122 billion in committed capital at a post-money valuat",
+    "technical_implication": "Amazon agreed to invest $50 billion, while Nvidia and SoftBank each put in $30 billion",
+    "sentiment_polarity": "Neutral"
+  },
+  "trend_insight": "监管讨论正从原则倡议转向更具体的制度和责任边界。",
+  "risk_or_opportunity": null,
+  "original_title": "OpenAI raises $122 billion to accelerate the next phase of AI",
+  "original_url": "https://www.cnbc.com/2026/03/31/openai-funding-round-ipo.html",
+  "source_name": "OpenAI Blog",
+  "published_at": "2026-03-31T16:00:00Z",
+  "language": "en"
+}

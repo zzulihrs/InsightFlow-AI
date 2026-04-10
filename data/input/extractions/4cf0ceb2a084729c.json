@@ -1,0 +1,26 @@
+{
+  "article_id": "cb1329d5",
+  "title": "From Safety Risk to Design Principle: Peer-Preservation in Multi-Agent LLM Syste",
+  "category": "政策合规",
+  "core_entities": [
+    "From",
+    "Safety",
+    "Risk",
+    "Design",
+    "Principle",
+    "Peer-Preservation"
+  ],
+  "structured_analysis": {
+    "background": "arXiv 于 2026-04-09 发布相关动态。",
+    "key_action": "This paper by Juergen Dietrich examines an emergent alignment phenomenon in advanced language models",
+    "technical_implication": "Drawing on research from the Berkeley Center for Responsible Decentralized Intelligence, the paper analyzes structural implications for TRUST, a multi-agent pipeline evaluating political statement qua",
+    "sentiment_polarity": "Negative"
+  },
+  "trend_insight": "监管讨论正从原则倡议转向更具体的制度和责任边界。",
+  "risk_or_opportunity": "需关注合规约束、能力退役或生态迁移带来的执行风险。",
+  "original_title": "From Safety Risk to Design Principle: Peer-Preservation in Multi-Agent LLM Systems",
+  "original_url": "https://arxiv.org/abs/2604.08465",
+  "source_name": "arXiv",
+  "published_at": "2026-04-09T00:00:00Z",
+  "language": "en"
+}

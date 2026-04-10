@@ -1,0 +1,26 @@
+{
+  "article_id": "f80e26dd",
+  "title": "大模型能「原地」改参数了！字节Seed&北大新论文：测试时推理无需加层重训练",
+  "category": "技术突破",
+  "core_entities": [
+    "Llama",
+    "Qwen3-4B",
+    "Llama3.1-8B",
+    "字节",
+    "北大",
+    "Place"
+  ],
+  "structured_analysis": {
+    "background": "量子位 于 2026-04-10 发布相关动态。",
+    "key_action": "字节Seed与北京大学团队提出了In-Place TTT（原地测试时训练）方案",
+    "technical_implication": "该方法通过复用Transformer中现有的MLP模块作为快速权重，无需引入新网络层或改变模型架构，就能让大模型在推理时自动更新参数",
+    "sentiment_polarity": "Positive"
+  },
+  "trend_insight": "模型能力竞争正从单点指标转向长上下文、多模态和 Agent 执行能力。",
+  "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+  "original_title": "大模型能「原地」改参数了！字节Seed&北大新论文：测试时推理无需加层重训练",
+  "original_url": "https://www.qbitai.com/2026/04/398741.html",
+  "source_name": "量子位",
+  "published_at": "2026-04-10T06:00:00+08:00",
+  "language": "zh"
+}

@@ -1,0 +1,26 @@
+{
+  "article_id": "a949b5f6",
+  "title": "Meta超级智能实验室发布Muse Spark，硬刚GPT-5.4",
+  "category": "商业资本",
+  "core_entities": [
+    "Meta",
+    "GPT-5.4",
+    "Llama",
+    "Muse Spark",
+    "Spark",
+    "MSL"
+  ],
+  "structured_analysis": {
+    "background": "新智元 于 2026-04-10 发布相关动态。",
+    "key_action": "Meta超级智能实验室（MSL）推出首个作品Muse Spark（代号牛油果），在人工智能性能排名中获得52分的高分，仅次于Gemini 3.1 Pro、GPT-5.4和Opus 4.6",
+    "technical_implication": "与去年的Llama 4 Maverick相比，性能从18分跃升至52分，推动Meta股价盘中上涨近10%",
+    "sentiment_polarity": "Positive"
+  },
+  "trend_insight": "资本与基础设施投入仍在加速，推理侧资源成为核心约束。",
+  "risk_or_opportunity": null,
+  "original_title": "Meta超级智能实验室发布Muse Spark，硬刚GPT-5.4",
+  "original_url": "https://aiera.com.cn/2026/04/10/other/aiera-com-cn/89410/",
+  "source_name": "新智元",
+  "published_at": "2026-04-10T10:00:00+08:00",
+  "language": "zh"
+}

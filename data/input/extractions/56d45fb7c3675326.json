@@ -1,0 +1,26 @@
+{
+  "article_id": "b996c2ee",
+  "title": "Introducing GPT-5.4: Native Computer Use, 1M Context Window, and Tool Search",
+  "category": "政策合规",
+  "core_entities": [
+    "OpenAI",
+    "GPT-5.4",
+    "Introducing",
+    "Native",
+    "Computer",
+    "Use"
+  ],
+  "structured_analysis": {
+    "background": "OpenAI Blog 于 2026-04-08 发布相关动态。",
+    "key_action": "OpenAI released GPT-5.4, the first general-purpose model with native, state-of-the-art computer-use ",
+    "technical_implication": "The model can interact with desktops through screenshots, control the mouse and keyboard, and write code using Playwright for browser automation",
+    "sentiment_polarity": "Negative"
+  },
+  "trend_insight": "监管讨论正从原则倡议转向更具体的制度和责任边界。",
+  "risk_or_opportunity": "需关注合规约束、能力退役或生态迁移带来的执行风险。",
+  "original_title": "Introducing GPT-5.4: Native Computer Use, 1M Context Window, and Tool Search",
+  "original_url": "https://applyingai.com/2026/03/gpt-5-4-unveiled-native-computer-use-and-a-million-token-context-window-propel-ai-agents-forward/",
+  "source_name": "OpenAI Blog",
+  "published_at": "2026-04-08T17:00:00Z",
+  "language": "en"
+}

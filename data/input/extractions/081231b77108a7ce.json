@@ -1,0 +1,26 @@
+{
+  "article_id": "967cf46b",
+  "title": "Retiring GPT-4o, GPT-4.1, GPT-4.1 mini, and OpenAI o4-mini in ChatGPT",
+  "category": "技术突破",
+  "core_entities": [
+    "OpenAI",
+    "GPT-4o",
+    "Retiring",
+    "GPT-4.1",
+    "ChatGPT",
+    "The"
+  ],
+  "structured_analysis": {
+    "background": "OpenAI Blog 于 2026-04-03 发布相关动态。",
+    "key_action": "OpenAI announced the retirement of GPT-4o, GPT-4.1, GPT-4.1 mini, and o4-mini from ChatGPT",
+    "technical_implication": "The retirement was driven by the fact that the vast majority of usage has shifted to GPT-5.2, with only 0.1% of users still choosing GPT-4o each day",
+    "sentiment_polarity": "Negative"
+  },
+  "trend_insight": "模型能力竞争正从单点指标转向长上下文、多模态和 Agent 执行能力。",
+  "risk_or_opportunity": "需关注合规约束、能力退役或生态迁移带来的执行风险。",
+  "original_title": "Retiring GPT-4o, GPT-4.1, GPT-4.1 mini, and OpenAI o4-mini in ChatGPT",
+  "original_url": "https://techcrunch.com/2026/02/06/the-backlash-over-openais-decision-to-retire-gpt-4o-shows-how-dangerous-ai-companions-can-be/",
+  "source_name": "OpenAI Blog",
+  "published_at": "2026-04-03T14:00:00Z",
+  "language": "en"
+}

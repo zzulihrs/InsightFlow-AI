@@ -1,0 +1,25 @@
+{
+  "article_id": "d6afa1c8",
+  "title": "阿里视频生成大模型Wan2.7登顶DesignArena榜单",
+  "category": "产品发布",
+  "core_entities": [
+    "Grok",
+    "Wan2.7",
+    "阿里",
+    "Imagine",
+    "Wan2.7-"
+  ],
+  "structured_analysis": {
+    "background": "量子位 于 2026-04-10 发布相关动态。",
+    "key_action": "阿里巴巴推出的大模型Wan2.7在视频编辑功能上表现突出，以1334 Elo评分高居DesignArena榜首，大幅领先第二名Grok Imagine（1266分），优势达68分",
+    "technical_implication": "DesignArena是由全球用户投票产生排行榜的AI生成设计评测平台",
+    "sentiment_polarity": "Positive"
+  },
+  "trend_insight": "产品发布正在强调可用性、工具调用与企业场景落地。",
+  "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+  "original_title": "阿里视频生成大模型Wan2.7登顶DesignArena榜单",
+  "original_url": "https://www.qbitai.com/2026/04/399370.html",
+  "source_name": "量子位",
+  "published_at": "2026-04-10T08:00:00+08:00",
+  "language": "zh"
+}

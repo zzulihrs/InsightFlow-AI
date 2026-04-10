@@ -1,0 +1,26 @@
+{
+  "article_id": "7f571864",
+  "title": "NousResearch/hermes-agent: The agent that grows with you",
+  "category": "技术突破",
+  "core_entities": [
+    "GitHub",
+    "NousResearch/hermes-agent",
+    "The",
+    "NousResearch",
+    "Trending",
+    "AI"
+  ],
+  "structured_analysis": {
+    "background": "GitHub Trending 于 2026-04-10 发布相关动态。",
+    "key_action": "NousResearch's hermes-agent has surged to the top of GitHub Trending with 7,674 stars gained in a si",
+    "technical_implication": "The project describes itself as 'the agent that grows with you', an open-source AI agent framework built in Python",
+    "sentiment_polarity": "Positive"
+  },
+  "trend_insight": "模型能力竞争正从单点指标转向长上下文、多模态和 Agent 执行能力。",
+  "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+  "original_title": "NousResearch/hermes-agent: The agent that grows with you",
+  "original_url": "https://github.com/NousResearch/hermes-agent",
+  "source_name": "GitHub Trending",
+  "published_at": "2026-04-10T00:00:00Z",
+  "language": "en"
+}

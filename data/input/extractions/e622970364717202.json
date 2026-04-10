@@ -1,0 +1,26 @@
+{
+  "article_id": "efd45c29",
+  "title": "HKUDS/DeepTutor: Agent-Native Personalized Learning Assistant",
+  "category": "商业资本",
+  "core_entities": [
+    "GitHub",
+    "DeepTutor",
+    "HKUDS/DeepTutor",
+    "Agent-Native",
+    "Personalized",
+    "Learning"
+  ],
+  "structured_analysis": {
+    "background": "GitHub Trending 于 2026-04-10 发布相关动态。",
+    "key_action": "DeepTutor by the HKU Data Science lab is trending on GitHub with 1,426 stars gained today",
+    "technical_implication": "It is an agent-native personalized learning assistant that leverages AI to create adaptive educational experiences",
+    "sentiment_polarity": "Positive"
+  },
+  "trend_insight": "资本与基础设施投入仍在加速，推理侧资源成为核心约束。",
+  "risk_or_opportunity": null,
+  "original_title": "HKUDS/DeepTutor: Agent-Native Personalized Learning Assistant",
+  "original_url": "https://github.com/HKUDS/DeepTutor",
+  "source_name": "GitHub Trending",
+  "published_at": "2026-04-10T00:00:00Z",
+  "language": "en"
+}

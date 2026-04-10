@@ -21,13 +21,13 @@
   "category": "枚举值，只能是以下之一: 技术突破 / 商业资本 / 产品发布 / 政策合规",
   "core_entities": ["实体列表，提取公司名/产品名/技术名词/人名，至少1个，最多10个"],
   "structured_analysis": {{
-    "background": "事件发生的背景 (50字以内)",
-    "key_action": "核心动作或突破点 (50字以内)",
-    "technical_implication": "对现有技术架构或开发流程的影响 (100字以内)。如果是非技术新闻，描述对行业生态的影响",
+    "background": "事件发生的背景 (50字左右)",
+    "key_action": "核心动作或突破点 (50字左右)",
+    "technical_implication": "对现有技术架构或开发流程的影响 (100字左右)。如果是非技术新闻，描述对行业生态的影响",
     "sentiment_polarity": "枚举值，只能是: Positive / Neutral / Negative"
   }},
-  "trend_insight": "该事件反映的行业趋势 (50字以内)。如果无明显趋势，输出 null",
-  "risk_or_opportunity": "潜在风险或投资/开发机会 (50字以内)。如果无，输出 null"
+  "trend_insight": "该事件反映的行业趋势 (50字左右)。如果无明显趋势，输出 null",
+  "risk_or_opportunity": "潜在风险或投资/开发机会 (50字左右)。如果无，输出 null"
 }}
 
 # Constraints

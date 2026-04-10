@@ -1,0 +1,26 @@
+{
+  "article_id": "47be1937",
+  "title": "Anthropic ups compute deal with Google and Broadcom amid skyrocketing demand",
+  "category": "政策合规",
+  "core_entities": [
+    "Anthropic",
+    "Google",
+    "Claude",
+    "Broadcom",
+    "SEC",
+    "U.S"
+  ],
+  "structured_analysis": {
+    "background": "HackerNews 于 2026-04-07 发布相关动态。",
+    "key_action": "Anthropic announced an expansion of its partnership with Google and Broadcom for multiple gigawatts ",
+    "technical_implication": "A recent Broadcom SEC filing shows the deal includes 3.5 gigawatts of compute capacity, the majority housed in the U.S. as part of Anthropic's $50 billion commitment to invest in U.S. compute infrastr",
+    "sentiment_polarity": "Negative"
+  },
+  "trend_insight": "监管讨论正从原则倡议转向更具体的制度和责任边界。",
+  "risk_or_opportunity": "需关注合规约束、能力退役或生态迁移带来的执行风险。",
+  "original_title": "Anthropic ups compute deal with Google and Broadcom amid skyrocketing demand",
+  "original_url": "https://techcrunch.com/2026/04/07/anthropic-compute-deal-google-broadcom-tpus/",
+  "source_name": "HackerNews",
+  "published_at": "2026-04-07T14:00:00Z",
+  "language": "en"
+}

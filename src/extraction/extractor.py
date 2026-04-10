@@ -1,4 +1,7 @@
+import hashlib
+import json
 import re
+from pathlib import Path
 
 from loguru import logger
 
@@ -11,6 +14,30 @@ from src.models import (
 )
 from src.llm.client import ClaudeClient
 from src.llm.prompts import PromptManager
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+EXTRACTIONS_DIR = PROJECT_ROOT / "data" / "input" / "extractions"
+
+
+def _cache_key(url: str) -> str:
+    return hashlib.sha256(url.encode()).hexdigest()[:16]
+
+
+def _load_from_cache(url: str) -> StructuredArticle | None:
+    path = EXTRACTIONS_DIR / f"{_cache_key(url)}.json"
+    if not path.exists():
+        return None
+    try:
+        return StructuredArticle.model_validate_json(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        logger.warning("Cache load failed for {}: {}", url, exc)
+        return None
+
+
+def _save_to_cache(article: StructuredArticle) -> None:
+    EXTRACTIONS_DIR.mkdir(parents=True, exist_ok=True)
+    path = EXTRACTIONS_DIR / f"{_cache_key(article.original_url)}.json"
+    path.write_text(article.model_dump_json(indent=2), encoding="utf-8")
 
 SYSTEM_PROMPT = "你是一个 AI 行业信息结构化抽取引擎。请严格按照指示输出合法 JSON。"
 
@@ -135,7 +162,22 @@ async def extract_batch(
     client: ClaudeClient,
     prompt_mgr: PromptManager,
 ) -> list[StructuredArticle]:
-    """Extract structured data from all articles using heuristics (no LLM calls)."""
-    results = [_fallback_extract(a) for a in articles]
-    logger.info(f"Extraction (heuristic): {len(results)}/{len(articles)} completed")
+    """Extract structured data from all articles, using cache when available."""
+    results = []
+    cache_hits = 0
+
+    for article in articles:
+        cached = _load_from_cache(article.url)
+        if cached is not None:
+            results.append(cached)
+            cache_hits += 1
+        else:
+            extracted = _fallback_extract(article)
+            _save_to_cache(extracted)
+            results.append(extracted)
+
+    logger.info(
+        f"Extraction: {len(results)}/{len(articles)} completed "
+        f"({cache_hits} from cache, {len(results) - cache_hits} freshly extracted)"
+    )
     return results

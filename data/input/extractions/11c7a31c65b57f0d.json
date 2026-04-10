@@ -1,0 +1,23 @@
+{
+  "article_id": "77442a74",
+  "title": "2026年各大科技巨头对AI的趋势预测",
+  "category": "政策合规",
+  "core_entities": [
+    "Google",
+    "AI",
+    "IBM"
+  ],
+  "structured_analysis": {
+    "background": "知乎 于 2026-03-28 发布相关动态。",
+    "key_action": "2025年是人工智能从技术实验迈向规模化落地的关键一年，经过一年快速迭代，AI不再局限于回答问题或生成内容，而是向实体执行的深层维度演进",
+    "technical_implication": "关键趋势包括：AI Agents成为核心，几乎所有科技巨头都在强调Agent从工具演变为主动合作伙伴，出现员工专属Agent、Agent并行协同等趋势；安全与伦理加强，微软、IBM、MIT等均提到AI内生安全、数据透明度和监管；行业垂直应用落地，特别是医疗、制造、交通、科研等领域；人力资源与技能转型，Google、IBM、斯坦福等强调员工需提升技能以适应AI；基础设施朝超大规模和分布式网络两个方向",
+    "sentiment_polarity": "Negative"
+  },
+  "trend_insight": "监管讨论正从原则倡议转向更具体的制度和责任边界。",
+  "risk_or_opportunity": "需关注合规约束、能力退役或生态迁移带来的执行风险。",
+  "original_title": "2026年各大科技巨头对AI的趋势预测",
+  "original_url": "https://zhuanlan.zhihu.com/p/2011108769992577031",
+  "source_name": "知乎",
+  "published_at": "2026-03-28T10:00:00+08:00",
+  "language": "zh"
+}

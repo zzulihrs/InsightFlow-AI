@@ -79,21 +79,21 @@ async def run_pipeline(report_date: str | None = None) -> dict:
         if not unique:
             raise RuntimeError("No articles after ingestion")
 
-        # Resolve report_date from article data (honest date labeling)
+        # Resolve report_date and filter to exact date
         if user_specified_date is None:
-            # Use the latest published_at date in the dataset
-            report_date = max(
-                a.published_at.date() for a in unique
-            ).isoformat()
-            logger.info(f"  Auto-detected report date: {report_date}")
+            # Auto-detect the most recent published date in the dataset
+            latest_date = max(a.published_at.date() for a in unique)
+            report_date = latest_date.isoformat()
+            unique = [a for a in unique if a.published_at.date() == latest_date]
+            logger.info(f"  Auto-detected report date: {report_date}, kept {len(unique)} articles")
         else:
-            # Filter to articles published on or before the specified date
+            # Filter to articles published on exactly the specified date
             cutoff = date.fromisoformat(user_specified_date)
-            unique = [a for a in unique if a.published_at.date() <= cutoff]
+            unique = [a for a in unique if a.published_at.date() == cutoff]
             report_date = user_specified_date
             if not unique:
                 raise RuntimeError(
-                    f"No articles with published_at <= {report_date} in dataset"
+                    f"No articles with published_at == {report_date} in dataset"
                 )
             logger.info(f"  Using specified date {report_date}, kept {len(unique)} articles")
 

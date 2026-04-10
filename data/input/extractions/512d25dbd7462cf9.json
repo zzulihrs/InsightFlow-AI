@@ -1,0 +1,26 @@
+{
+  "article_id": "158b0990",
+  "title": "OpenAI backs Illinois SB 3444: AI liability bill shields labs from 'critical har",
+  "category": "政策合规",
+  "core_entities": [
+    "OpenAI",
+    "Illinois",
+    "SB",
+    "AI",
+    "The",
+    "Under"
+  ],
+  "structured_analysis": {
+    "background": "HackerNews 于 2026-04-08 发布相关动态。",
+    "key_action": "OpenAI publicly supports Illinois state bill SB 3444, which shields AI labs from liability for criti",
+    "technical_implication": "The bill defines frontier models as those trained with over $100 million in computational costs",
+    "sentiment_polarity": "Neutral"
+  },
+  "trend_insight": "监管讨论正从原则倡议转向更具体的制度和责任边界。",
+  "risk_or_opportunity": null,
+  "original_title": "OpenAI backs Illinois SB 3444: AI liability bill shields labs from 'critical harms' lawsuits",
+  "original_url": "https://www.techbuzz.ai/articles/openai-pushes-illinois-bill-shielding-ai-labs-from-liability",
+  "source_name": "HackerNews",
+  "published_at": "2026-04-08T18:00:00Z",
+  "language": "en"
+}

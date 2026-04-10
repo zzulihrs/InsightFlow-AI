@@ -1,0 +1,26 @@
+{
+  "article_id": "dd12dad3",
+  "title": "Claude Mythos Preview and Project Glasswing: Securing critical software for the ",
+  "category": "产品发布",
+  "core_entities": [
+    "Anthropic",
+    "Microsoft",
+    "Google",
+    "Claude",
+    "Mythos",
+    "Preview"
+  ],
+  "structured_analysis": {
+    "background": "Anthropic Blog 于 2026-04-07 发布相关动态。",
+    "key_action": "Anthropic announced Claude Mythos Preview, a new general-purpose language model that performs strong",
+    "technical_implication": "Alongside it, Project Glasswing is an initiative to use Mythos Preview to help secure the world's most critical software and prepare the industry for advanced cyberattackers",
+    "sentiment_polarity": "Positive"
+  },
+  "trend_insight": "产品发布正在强调可用性、工具调用与企业场景落地。",
+  "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+  "original_title": "Claude Mythos Preview and Project Glasswing: Securing critical software for the AI era",
+  "original_url": "https://www.anthropic.com/glasswing",
+  "source_name": "Anthropic Blog",
+  "published_at": "2026-04-07T15:00:00Z",
+  "language": "en"
+}

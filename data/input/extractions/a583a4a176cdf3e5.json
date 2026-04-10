@@ -1,0 +1,26 @@
+{
+  "article_id": "7496fee2",
+  "title": "SUPERNOVA: Eliciting General Reasoning in LLMs with Reinforcement Learning on Na",
+  "category": "技术突破",
+  "core_entities": [
+    "SUPERNOVA",
+    "Eliciting",
+    "General",
+    "Reasoning",
+    "LLMs",
+    "Reinforcement"
+  ],
+  "structured_analysis": {
+    "background": "arXiv 于 2026-04-09 发布相关动态。",
+    "key_action": "Researchers from the University of Washington present SUPERNOVA, a framework for improving general r",
+    "technical_implication": "While RL with verifiable rewards has advanced LLM reasoning in formal domains like math, general reasoning tasks remain challenging",
+    "sentiment_polarity": "Neutral"
+  },
+  "trend_insight": "模型能力竞争正从单点指标转向长上下文、多模态和 Agent 执行能力。",
+  "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+  "original_title": "SUPERNOVA: Eliciting General Reasoning in LLMs with Reinforcement Learning on Natural Instructions",
+  "original_url": "https://arxiv.org/abs/2604.08477",
+  "source_name": "arXiv",
+  "published_at": "2026-04-09T00:00:00Z",
+  "language": "en"
+}

@@ -1,0 +1,26 @@
+{
+  "article_id": "4373db81",
+  "title": "Anthropic's Model Context Protocol crosses 97 million installs, becomes foundati",
+  "category": "产品发布",
+  "core_entities": [
+    "OpenAI",
+    "Anthropic",
+    "Microsoft",
+    "Google",
+    "MCP",
+    "Model"
+  ],
+  "structured_analysis": {
+    "background": "HackerNews 于 2026-04-02 发布相关动态。",
+    "key_action": "Anthropic's Model Context Protocol (MCP) crossed 97 million monthly SDK downloads in March 2026, ach",
+    "technical_implication": "From approximately 2 million installs at launch in November 2024, MCP reached comparable scale in just 16 months",
+    "sentiment_polarity": "Positive"
+  },
+  "trend_insight": "产品发布正在强调可用性、工具调用与企业场景落地。",
+  "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+  "original_title": "Anthropic's Model Context Protocol crosses 97 million installs, becomes foundation layer for agentic AI",
+  "original_url": "https://www.arturmarkus.com/anthropics-model-context-protocol-hits-97-million-installs-on-march-25-mcp-transitions-from-experimental-to-foundation-layer-for-agentic-ai/",
+  "source_name": "HackerNews",
+  "published_at": "2026-04-02T10:00:00Z",
+  "language": "en"
+}

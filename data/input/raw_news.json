@@ -72,7 +72,7 @@
     "title": "深度讨论2026年AI预测：最关键的下注点在哪？",
     "content": "知乎组织了2026 AI Best Ideas社群讨论，AI研究人员、创业者、产品经理和投资人围绕三大核心议题展开深入讨论。第一，AI公司竞争格局：OpenAI、Anthropic、Google三强鼎立，但开源阵营（DeepSeek、Llama）正在快速缩小差距，关键变量是推理成本的下降速度。第二，AI应用与智能体形态：2026年将是Agent元年，从单一对话式AI转向多Agent协作、长时任务执行和自主决策，企业级Agent平台将成为最大赛道。第三，算力与基础设施瓶颈：训练算力见顶后，推理算力需求爆发式增长，推理芯片和边缘计算成为新的投资热点。社群共识认为，2026年AI投资的最大机会在应用层而非基础模型层。",
     "url": "https://www.huxiu.com/article/4820860.html",
-    "published_at": "2026-03-15T14:00:00+08:00",
+    "published_at": "2026-04-9T14:00:00+08:00",
     "language": "zh",
     "source_weight": 0.9
   },
@@ -105,7 +105,7 @@
     "title": "Retiring GPT-4o, GPT-4.1, GPT-4.1 mini, and OpenAI o4-mini in ChatGPT",
     "content": "OpenAI announced the retirement of GPT-4o, GPT-4.1, GPT-4.1 mini, and o4-mini from ChatGPT. The retirement was driven by the fact that the vast majority of usage has shifted to GPT-5.2, with only 0.1% of users still choosing GPT-4o each day. GPT-4o was initially retired from consumer plans on February 13, 2026, while Business, Enterprise, and Edu customers retained access within Custom GPTs until April 3, 2026, after which GPT-4o was fully retired across all plans. The direct replacement is GPT-5.1 mini for general tasks, or o3-mini for reasoning-heavy loads. For coding tasks, GPT-5-Codex or GPT-5.1 are the recommended replacements. These models continue to be available in the API for developers who need them.",
     "url": "https://techcrunch.com/2026/02/06/the-backlash-over-openais-decision-to-retire-gpt-4o-shows-how-dangerous-ai-companions-can-be/",
-    "published_at": "2026-04-03T14:00:00Z",
+    "published_at": "2026-04-09T14:00:00Z",
     "language": "en",
     "source_weight": 1.5
   },
@@ -116,7 +116,7 @@
     "title": "Claude Mythos Preview and Project Glasswing: Securing critical software for the AI era",
     "content": "Anthropic announced Claude Mythos Preview, a new general-purpose language model that performs strongly across the board and is strikingly capable at computer security tasks. Alongside it, Project Glasswing is an initiative to use Mythos Preview to help secure the world's most critical software and prepare the industry for advanced cyberattackers. Over the past few weeks, Anthropic used Mythos Preview to identify thousands of zero-day vulnerabilities, many critical, in every major operating system and web browser. The model fully autonomously identified and exploited a 17-year-old remote code execution vulnerability in FreeBSD, and can chain three to five vulnerabilities together to create exploits. Access is provided to roughly 40 organizations including AWS, Apple, Broadcom, Cisco, CrowdStrike, Google, JPMorgan Chase, Microsoft, and Nvidia. Anthropic does not plan to make Mythos Preview generally available until new safeguards are in place.",
     "url": "https://www.anthropic.com/glasswing",
-    "published_at": "2026-04-07T15:00:00Z",
+    "published_at": "2026-04-09T15:00:00Z",
     "language": "en",
     "source_weight": 1.5
   },

@@ -1,0 +1,26 @@
+{
+  "article_id": "5fedfb88",
+  "title": "Claude Managed Agents launches in public beta",
+  "category": "产品发布",
+  "core_entities": [
+    "Anthropic",
+    "Claude",
+    "Managed",
+    "Agents",
+    "April",
+    "The"
+  ],
+  "structured_analysis": {
+    "background": "Anthropic Blog 于 2026-04-08 发布相关动态。",
+    "key_action": "Anthropic launched Claude Managed Agents in public beta on April 8, 2026",
+    "technical_implication": "The service provides a suite of composable APIs for building and deploying cloud-hosted agents at scale",
+    "sentiment_polarity": "Positive"
+  },
+  "trend_insight": "产品发布正在强调可用性、工具调用与企业场景落地。",
+  "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+  "original_title": "Claude Managed Agents launches in public beta",
+  "original_url": "https://platform.claude.com/docs/en/managed-agents/overview",
+  "source_name": "Anthropic Blog",
+  "published_at": "2026-04-08T16:00:00Z",
+  "language": "en"
+}

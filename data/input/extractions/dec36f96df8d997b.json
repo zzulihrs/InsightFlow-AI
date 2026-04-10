@@ -1,0 +1,26 @@
+{
+  "article_id": "5e8961d0",
+  "title": "microsoft/markitdown: Python tool for converting files and office documents to M",
+  "category": "技术突破",
+  "core_entities": [
+    "Microsoft",
+    "GitHub",
+    "MarkItDown",
+    "Python",
+    "Markdown",
+    "The"
+  ],
+  "structured_analysis": {
+    "background": "GitHub Trending 于 2026-04-10 发布相关动态。",
+    "key_action": "Microsoft's markitdown is trending on GitHub with 2,353 stars gained today",
+    "technical_implication": "The tool converts various file formats and office documents to Markdown, making it a crucial utility for AI/LLM workflows where structured text input is essential",
+    "sentiment_polarity": "Neutral"
+  },
+  "trend_insight": "模型能力竞争正从单点指标转向长上下文、多模态和 Agent 执行能力。",
+  "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+  "original_title": "microsoft/markitdown: Python tool for converting files and office documents to Markdown",
+  "original_url": "https://github.com/microsoft/markitdown",
+  "source_name": "GitHub Trending",
+  "published_at": "2026-04-10T00:00:00Z",
+  "language": "en"
+}

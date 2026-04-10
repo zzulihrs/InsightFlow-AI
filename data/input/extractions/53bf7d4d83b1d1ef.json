@@ -1,0 +1,25 @@
+{
+  "article_id": "6da14881",
+  "title": "马斯克说漏嘴了！Claude Opus参数5T，Sonnet 1T",
+  "category": "产品发布",
+  "core_entities": [
+    "Anthropic",
+    "Claude",
+    "Grok",
+    "马斯克",
+    "Sonnet"
+  ],
+  "structured_analysis": {
+    "background": "量子位 于 2026-04-10 发布相关动态。",
+    "key_action": "马斯克在社交媒体上意外泄露了Claude模型的参数规模信息",
+    "technical_implication": "他表示xAI的Colossus 2超算正训练多个模型，其中最大的达10万亿参数",
+    "sentiment_polarity": "Positive"
+  },
+  "trend_insight": "产品发布正在强调可用性、工具调用与企业场景落地。",
+  "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+  "original_title": "马斯克说漏嘴了！Claude Opus参数5T，Sonnet 1T",
+  "original_url": "https://www.qbitai.com/2026/04/398420.html",
+  "source_name": "量子位",
+  "published_at": "2026-04-10T06:00:00+08:00",
+  "language": "zh"
+}
