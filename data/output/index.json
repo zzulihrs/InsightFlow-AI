@@ -1,0 +1,31 @@
+{
+  "reports": [
+    {
+      "date": "2026-04-11",
+      "summary_zh": "今日最核心事件为GPT-5.4发布与Claude Managed Agents公测双重爆发，叠加Op",
+      "total_processed": 20,
+      "total_filtered": 19,
+      "avg_score": 9.0,
+      "top_category": "政策合规",
+      "generated_at": "2026-04-11 04:26:21"
+    },
+    {
+      "date": "2026-04-10",
+      "summary_zh": "① 今日最核心事件：字节Seed与北大提出In-Place TTT，实现大模型推理时无需加层即可自动",
+      "total_processed": 7,
+      "total_filtered": 7,
+      "avg_score": 8.8,
+      "top_category": "商业资本",
+      "generated_at": "2026-04-11 04:39:02"
+    },
+    {
+      "date": "2026-04-09",
+      "summary_zh": "今日最核心事件为Anthropic发布Claude Mythos Preview并启动Project",
+      "total_processed": 4,
+      "total_filtered": 4,
+      "avg_score": 7.75,
+      "top_category": "技术突破",
+      "generated_at": "2026-04-11 04:48:11"
+    }
+  ]
+}

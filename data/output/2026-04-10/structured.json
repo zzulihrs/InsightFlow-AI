@@ -1,0 +1,182 @@
+[
+  {
+    "article_id": "d6afa1c8",
+    "title": "阿里视频生成大模型Wan2.7登顶DesignArena榜单",
+    "category": "产品发布",
+    "core_entities": [
+      "Grok",
+      "Wan2.7",
+      "阿里",
+      "Imagine",
+      "Wan2.7-"
+    ],
+    "structured_analysis": {
+      "background": "量子位 于 2026-04-10 发布相关动态。",
+      "key_action": "阿里巴巴推出的大模型Wan2.7在视频编辑功能上表现突出，以1334 Elo评分高居DesignArena榜首，大幅领先第二名Grok Imagine（1266分），优势达68分",
+      "technical_implication": "DesignArena是由全球用户投票产生排行榜的AI生成设计评测平台",
+      "sentiment_polarity": "Positive"
+    },
+    "trend_insight": "产品发布正在强调可用性、工具调用与企业场景落地。",
+    "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+    "original_title": "阿里视频生成大模型Wan2.7登顶DesignArena榜单",
+    "original_url": "https://www.qbitai.com/2026/04/399370.html",
+    "source_name": "量子位",
+    "published_at": "2026-04-10T08:00:00+08:00",
+    "language": "zh"
+  },
+  {
+    "article_id": "f80e26dd",
+    "title": "大模型能「原地」改参数了！字节Seed&北大新论文：测试时推理无需加层重训练",
+    "category": "技术突破",
+    "core_entities": [
+      "Llama",
+      "Qwen3-4B",
+      "Llama3.1-8B",
+      "字节",
+      "北大",
+      "Place"
+    ],
+    "structured_analysis": {
+      "background": "量子位 于 2026-04-10 发布相关动态。",
+      "key_action": "字节Seed与北京大学团队提出了In-Place TTT（原地测试时训练）方案",
+      "technical_implication": "该方法通过复用Transformer中现有的MLP模块作为快速权重，无需引入新网络层或改变模型架构，就能让大模型在推理时自动更新参数",
+      "sentiment_polarity": "Positive"
+    },
+    "trend_insight": "模型能力竞争正从单点指标转向长上下文、多模态和 Agent 执行能力。",
+    "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+    "original_title": "大模型能「原地」改参数了！字节Seed&北大新论文：测试时推理无需加层重训练",
+    "original_url": "https://www.qbitai.com/2026/04/398741.html",
+    "source_name": "量子位",
+    "published_at": "2026-04-10T06:00:00+08:00",
+    "language": "zh"
+  },
+  {
+    "article_id": "6da14881",
+    "title": "马斯克说漏嘴了！Claude Opus参数5T，Sonnet 1T",
+    "category": "产品发布",
+    "core_entities": [
+      "Anthropic",
+      "Claude",
+      "Grok",
+      "马斯克",
+      "Sonnet"
+    ],
+    "structured_analysis": {
+      "background": "量子位 于 2026-04-10 发布相关动态。",
+      "key_action": "马斯克在社交媒体上意外泄露了Claude模型的参数规模信息",
+      "technical_implication": "他表示xAI的Colossus 2超算正训练多个模型，其中最大的达10万亿参数",
+      "sentiment_polarity": "Positive"
+    },
+    "trend_insight": "产品发布正在强调可用性、工具调用与企业场景落地。",
+    "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+    "original_title": "马斯克说漏嘴了！Claude Opus参数5T，Sonnet 1T",
+    "original_url": "https://www.qbitai.com/2026/04/398420.html",
+    "source_name": "量子位",
+    "published_at": "2026-04-10T06:00:00+08:00",
+    "language": "zh"
+  },
+  {
+    "article_id": "a949b5f6",
+    "title": "Meta超级智能实验室发布Muse Spark，硬刚GPT-5.4",
+    "category": "商业资本",
+    "core_entities": [
+      "Meta",
+      "GPT-5.4",
+      "Llama",
+      "Muse Spark",
+      "Spark",
+      "MSL"
+    ],
+    "structured_analysis": {
+      "background": "新智元 于 2026-04-10 发布相关动态。",
+      "key_action": "Meta超级智能实验室（MSL）推出首个作品Muse Spark（代号牛油果），在人工智能性能排名中获得52分的高分，仅次于Gemini 3.1 Pro、GPT-5.4和Opus 4.6",
+      "technical_implication": "与去年的Llama 4 Maverick相比，性能从18分跃升至52分，推动Meta股价盘中上涨近10%",
+      "sentiment_polarity": "Positive"
+    },
+    "trend_insight": "资本与基础设施投入仍在加速，推理侧资源成为核心约束。",
+    "risk_or_opportunity": null,
+    "original_title": "Meta超级智能实验室发布Muse Spark，硬刚GPT-5.4",
+    "original_url": "https://aiera.com.cn/2026/04/10/other/aiera-com-cn/89410/",
+    "source_name": "新智元",
+    "published_at": "2026-04-10T10:00:00+08:00",
+    "language": "zh"
+  },
+  {
+    "article_id": "7f571864",
+    "title": "NousResearch/hermes-agent: The agent that grows with you",
+    "category": "技术突破",
+    "core_entities": [
+      "GitHub",
+      "NousResearch/hermes-agent",
+      "The",
+      "NousResearch",
+      "Trending",
+      "AI"
+    ],
+    "structured_analysis": {
+      "background": "GitHub Trending 于 2026-04-10 发布相关动态。",
+      "key_action": "NousResearch's hermes-agent has surged to the top of GitHub Trending with 7,674 stars gained in a si",
+      "technical_implication": "The project describes itself as 'the agent that grows with you', an open-source AI agent framework built in Python",
+      "sentiment_polarity": "Positive"
+    },
+    "trend_insight": "模型能力竞争正从单点指标转向长上下文、多模态和 Agent 执行能力。",
+    "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+    "original_title": "NousResearch/hermes-agent: The agent that grows with you",
+    "original_url": "https://github.com/NousResearch/hermes-agent",
+    "source_name": "GitHub Trending",
+    "published_at": "2026-04-10T00:00:00Z",
+    "language": "en"
+  },
+  {
+    "article_id": "5e8961d0",
+    "title": "microsoft/markitdown: Python tool for converting files and office documents to M",
+    "category": "技术突破",
+    "core_entities": [
+      "Microsoft",
+      "GitHub",
+      "MarkItDown",
+      "Python",
+      "Markdown",
+      "The"
+    ],
+    "structured_analysis": {
+      "background": "GitHub Trending 于 2026-04-10 发布相关动态。",
+      "key_action": "Microsoft's markitdown is trending on GitHub with 2,353 stars gained today",
+      "technical_implication": "The tool converts various file formats and office documents to Markdown, making it a crucial utility for AI/LLM workflows where structured text input is essential",
+      "sentiment_polarity": "Neutral"
+    },
+    "trend_insight": "模型能力竞争正从单点指标转向长上下文、多模态和 Agent 执行能力。",
+    "risk_or_opportunity": "若能力稳定并形成生态支持，该方向有机会快速进入实际落地阶段。",
+    "original_title": "microsoft/markitdown: Python tool for converting files and office documents to Markdown",
+    "original_url": "https://github.com/microsoft/markitdown",
+    "source_name": "GitHub Trending",
+    "published_at": "2026-04-10T00:00:00Z",
+    "language": "en"
+  },
+  {
+    "article_id": "efd45c29",
+    "title": "HKUDS/DeepTutor: Agent-Native Personalized Learning Assistant",
+    "category": "商业资本",
+    "core_entities": [
+      "GitHub",
+      "DeepTutor",
+      "HKUDS/DeepTutor",
+      "Agent-Native",
+      "Personalized",
+      "Learning"
+    ],
+    "structured_analysis": {
+      "background": "GitHub Trending 于 2026-04-10 发布相关动态。",
+      "key_action": "DeepTutor by the HKU Data Science lab is trending on GitHub with 1,426 stars gained today",
+      "technical_implication": "It is an agent-native personalized learning assistant that leverages AI to create adaptive educational experiences",
+      "sentiment_polarity": "Positive"
+    },
+    "trend_insight": "资本与基础设施投入仍在加速，推理侧资源成为核心约束。",
+    "risk_or_opportunity": null,
+    "original_title": "HKUDS/DeepTutor: Agent-Native Personalized Learning Assistant",
+    "original_url": "https://github.com/HKUDS/DeepTutor",
+    "source_name": "GitHub Trending",
+    "published_at": "2026-04-10T00:00:00Z",
+    "language": "en"
+  }
+]

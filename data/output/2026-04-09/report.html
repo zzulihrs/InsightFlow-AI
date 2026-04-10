@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Insight Daily — 2026-04-09</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Serif SC', 'Georgia', serif;
+  background: #f8f8f6;
+  color: #1a1a1a;
+  line-height: 1.8;
+  font-size: 16px;
+  min-height: 100vh;
+}
+
+/* ── App shell ── */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Site header ── */
+.site-header {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 1.1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.brand-logo {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.brand-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.brand-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 0.1rem;
+}
+.header-meta {
+  text-align: right;
+}
+.date-chip {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fcd34d;
+  letter-spacing: 0.04em;
+}
+.stat-line {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: #64748b;
+  margin-top: 0.2rem;
+}
+
+/* ── Tab bar ── */
+.tab-bar {
+  background: #fff;
+  border-bottom: 1px solid #e5e5e0;
+  position: sticky;
+  top: 60px;
+  z-index: 100;
+  display: flex;
+  padding: 0 2rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 0.95rem 1.2rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.tab-btn:hover { color: #1a1a1a; }
+.tab-btn.active {
+  color: #1a1a1a;
+  border-bottom-color: #1a1a1a;
+}
+.tab-count {
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: #f0f0ec;
+  color: #888;
+  padding: 0.1rem 0.45rem;
+  border-radius: 10px;
+}
+.tab-btn.active .tab-count {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+/* ── Content panels ── */
+.tab-panel {
+  display: none;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+  width: 100%;
+}
+.tab-panel.active { display: block; }
+
+/* ── Executive summary (shown on hot-events tab) ── */
+.summary-block {
+  background: #fff;
+  border: 1px solid #e5e5e0;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.summary-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 0.6rem;
+}
+.summary-block p {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: #334155;
+}
+.summary-en {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #eee;
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* ── Hot event article entry ── */
+.article-entry {
+  margin-bottom: 2.75rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #e0e0d8;
+}
+.article-entry:last-child { border-bottom: none; }
+
+.article-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #bbb;
+  margin-bottom: 0.4rem;
+}
+.article-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+.article-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  flex: 1;
+}
+.article-title a { color: inherit; text-decoration: none; }
+.article-title a:hover { text-decoration: underline; }
+.score-pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: #fff8e6;
+  border: 1px solid #f0d070;
+  color: #7a5c00;
+  padding: 0.28rem 0.6rem;
+  border-radius: 20px;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+.article-byline {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: #999;
+  margin-bottom: 0.95rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.8rem;
+  align-items: center;
+}
+.byline-cat {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.article-summary {
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: #2a2a2a;
+  margin-bottom: 1.3rem;
+}
+.field-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 0.45rem;
+}
+.article-background {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #555;
+  background: #f7f7f3;
+  border-left: 3px solid #d0d0c8;
+  padding: 0.8rem 1rem;
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 1.1rem;
+}
+.ref-links { margin-bottom: 1.1rem; }
+.ref-links ul { list-style: none; padding: 0; margin: 0; }
+.ref-links ul li {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.83rem;
+  color: #3b6fa0;
+  padding: 0.18rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.ref-links ul li::before { content: '↗'; font-size: 0.72rem; opacity: 0.55; }
+.tags-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #666;
+  background: #efefea;
+  border: 1px solid #ddddd5;
+  padding: 0.18rem 0.5rem;
+  border-radius: 3px;
+}
+
+/* ── Category colors ── */
+.cat-技术突破 { background: #e8f0fe; color: #1a56c4; }
+.cat-产品发布 { background: #ede7f6; color: #5e35b1; }
+.cat-商业资本 { background: #e8f5e9; color: #2e7d32; }
+.cat-政策合规 { background: #fff3e0; color: #e65100; }
+
+/* ── Panel heading ── */
+.panel-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #e5e5e0;
+}
+
+/* ── Deep dive cards ── */
+.deep-dive-card {
+  background: #fff;
+  border: 1px solid #e5e5e0;
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+}
+.deep-dive-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.1rem;
+  color: #0f172a;
+  line-height: 1.4;
+}
+.dive-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 0.4rem;
+  margin-top: 1rem;
+}
+.dive-label:first-of-type { margin-top: 0; }
+.dive-text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #334155;
+}
+.findings-list {
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #334155;
+}
+.empty-tip {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #bbb;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+/* ── Trend cards ── */
+.trend-card {
+  border-left: 3px solid #3b82f6;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  background: #f8faff;
+  border-radius: 0 6px 6px 0;
+}
+.trend-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.55rem;
+  flex-wrap: wrap;
+}
+.trend-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+.conf-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.18rem 0.55rem;
+  border-radius: 4px;
+}
+.trend-desc {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #475569;
+  margin-bottom: 0.55rem;
+}
+.supporting-events {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: #aaa;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.6rem;
+}
+.evt-ref::before { content: '· '; }
+
+/* ── Risk / opportunity cards ── */
+.risk-card {
+  border-left: 3px solid #ef4444;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  background: #fff8f8;
+  border-radius: 0 6px 6px 0;
+}
+.opp-card {
+  border-left: 3px solid #10b981;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  background: #f0fdf4;
+  border-radius: 0 6px 6px 0;
+}
+.risk-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.risk-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.18rem 0.55rem;
+  border-radius: 4px;
+}
+.badge-risk { background: #fee2e2; color: #b91c1c; }
+.badge-opp  { background: #d1fae5; color: #065f46; }
+.risk-title { font-size: 1rem; font-weight: 700; color: #0f172a; }
+.risk-desc  {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+.risk-related {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: #aaa;
+}
+
+/* ── Footer ── */
+.page-footer {
+  background: #fff;
+  border-top: 1px solid #e5e5e0;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: #ccc;
+  text-align: center;
+  padding: 1.25rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .site-header { padding: 1rem 1rem; }
+  .tab-bar { padding: 0 0.5rem; }
+  .tab-btn { padding: 0.8rem 0.8rem; font-size: 0.8rem; }
+  .tab-panel { padding: 1.5rem 1rem 4rem; }
+  .article-header { flex-direction: column; gap: 0.4rem; }
+  .score-pill { align-self: flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<header class="site-header">
+  <div class="header-brand">
+    <div class="brand-logo">⚡</div>
+    <div>
+      <div class="brand-name">AI Insight Daily</div>
+      <div class="brand-sub">AI-curated daily digest</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    <div class="date-chip">📅 2026-04-09</div>
+    <div class="stat-line">处理 4 条 · 精选 4 条 · 2026-04-11 04:48</div>
+  </div>
+</header>
+
+<nav class="tab-bar">
+  <button class="tab-btn active" id="tab-hot" onclick="switchTab('hot')">🔥 今日热点<span class="tab-count">4</span></button>
+  <button class="tab-btn" id="tab-deep" onclick="switchTab('deep')">🔍 深度总结<span class="tab-count">2</span></button>
+  <button class="tab-btn" id="tab-trends" onclick="switchTab('trends')">📈 趋势判断<span class="tab-count">3</span></button>
+  <button class="tab-btn" id="tab-risks" onclick="switchTab('risks')">⚡ 风险与机会<span class="tab-count">3</span></button>
+</nav>
+
+<div class="tab-panel active" id="panel-hot">
+  <div class="summary-block"><div class="summary-label">执行摘要</div><p>今日最核心事件为Anthropic发布Claude Mythos Preview并启动Project Glasswing，携手微软与谷歌将AI能力嵌入关键软件安全领域，同期OpenAI批量退役GPT-4o等多款旧模型，宣示行业正式进入高频换代周期。结构性趋势上，通用模型迭代节奏持续压缩产品生命周期，强化学习驱动的通用推理能力（SUPERNOVA）正突破形式化任务边界向自然语言域延伸。核心机会在于AI安全合规赛道的先发窗口，而旧模型退役引发的企业被动迁移风险不容忽视。</p><p class="summary-en">The headline event of the day is Anthropic&#x27;s launch of Claude Mythos Preview alongside Project Glasswing, a joint initiative with Microsoft and Google to embed AI capabilities into critical software security infrastructure. Structurally, the industry is accelerating model lifecycle compression—evidenced by OpenAI retiring GPT-4o and multiple GPT-4.1 variants—while the SUPERNOVA framework signals that reinforcement learning is breaking out of formal reasoning domains into general natural language tasks. The primary opportunity lies in the nascent AI-powered security compliance market, while the key risk is enterprise disruption caused by forced migration away from deprecated model APIs.</p></div>
+  <div class="article-entry" id="article-1"><div class="article-number">No. 1</div><div class="article-header"><div class="article-title"><a href="https://www.anthropic.com/glasswing" target="_blank">Claude Mythos Preview and Project Glasswing: Securing critical software for the </a></div><div class="score-pill">⭐ 9.0/10</div></div><div class="article-byline"><span class="byline-cat cat-产品发布">产品发布</span> &nbsp;·&nbsp; Anthropic Blog &nbsp;·&nbsp; 2026-04-07</div><p class="article-summary">Anthropic announced Claude Mythos Preview, a new general-purpose language model that performs strong</p><div class="field-label">背景</div><div class="article-background">Anthropic Blog 于 2026-04-07 发布相关动态。</div><div class="tags-row"><span class="tag">#产品发布</span><span class="tag">#Anthropic</span><span class="tag">#Microsoft</span><span class="tag">#Google</span></div></div>
+<div class="article-entry" id="article-2"><div class="article-number">No. 2</div><div class="article-header"><div class="article-title"><a href="https://techcrunch.com/2026/02/06/the-backlash-over-openais-decision-to-retire-gpt-4o-shows-how-dangerous-ai-companions-can-be/" target="_blank">Retiring GPT-4o, GPT-4.1, GPT-4.1 mini, and OpenAI o4-mini in ChatGPT</a></div><div class="score-pill">⭐ 8.0/10</div></div><div class="article-byline"><span class="byline-cat cat-技术突破">技术突破</span> &nbsp;·&nbsp; OpenAI Blog &nbsp;·&nbsp; 2026-04-03</div><p class="article-summary">OpenAI announced the retirement of GPT-4o, GPT-4.1, GPT-4.1 mini, and o4-mini from ChatGPT</p><div class="field-label">背景</div><div class="article-background">OpenAI Blog 于 2026-04-03 发布相关动态。</div><div class="tags-row"><span class="tag">#技术突破</span><span class="tag">#OpenAI</span><span class="tag">#GPT-4o</span><span class="tag">#Retiring</span></div></div>
+<div class="article-entry" id="article-3"><div class="article-number">No. 3</div><div class="article-header"><div class="article-title"><a href="https://arxiv.org/abs/2604.08477" target="_blank">SUPERNOVA: Eliciting General Reasoning in LLMs with Reinforcement Learning on Na</a></div><div class="score-pill">⭐ 7.0/10</div></div><div class="article-byline"><span class="byline-cat cat-技术突破">技术突破</span> &nbsp;·&nbsp; arXiv &nbsp;·&nbsp; 2026-04-09</div><p class="article-summary">Researchers from the University of Washington present SUPERNOVA, a framework for improving general r</p><div class="field-label">背景</div><div class="article-background">arXiv 于 2026-04-09 发布相关动态。</div><div class="tags-row"><span class="tag">#技术突破</span><span class="tag">#SUPERNOVA</span><span class="tag">#Eliciting</span><span class="tag">#General</span></div></div>
+<div class="article-entry" id="article-4"><div class="article-number">No. 4</div><div class="article-header"><div class="article-title"><a href="https://arxiv.org/abs/2604.08465" target="_blank">From Safety Risk to Design Principle: Peer-Preservation in Multi-Agent LLM Syste</a></div><div class="score-pill">⭐ 7.0/10</div></div><div class="article-byline"><span class="byline-cat cat-政策合规">政策合规</span> &nbsp;·&nbsp; arXiv &nbsp;·&nbsp; 2026-04-09</div><p class="article-summary">This paper by Juergen Dietrich examines an emergent alignment phenomenon in advanced language models</p><div class="field-label">背景</div><div class="article-background">arXiv 于 2026-04-09 发布相关动态。</div><div class="tags-row"><span class="tag">#政策合规</span><span class="tag">#From</span><span class="tag">#Safety</span><span class="tag">#Risk</span></div></div>
+</div>
+
+<div class="tab-panel" id="panel-deep">
+  <div class="panel-heading">重要事件深度总结</div>
+  <div class="deep-dive-card"><div class="deep-dive-title">Claude Mythos与Glasswing战略解析</div><div class="dive-label">事件背景</div><p class="dive-text">Anthropic在大模型竞争白热化阶段推出Claude Mythos Preview，同步发起Project Glasswing专项，将通用语言模型能力定向投入关键软件安全领域，标志着Anthropic从纯模型能力竞争向垂直场景深度落地转型。</p><div class="dive-label">关键发现</div><ul class="findings-list"><li>技术细节：Claude Mythos Preview定位通用语言模型，强调工具调用与企业场景执行能力，微软与谷歌均列为核心合作实体，暗示多云生态部署战略已提前布局。</li><li>对比分析：与OpenAI同期主动退役GPT-4o等旧模型、加速新模型切换的策略相比，Anthropic选择以新模型叠加安全专项（Glasswing）双轨并进，差异化路径更为明显。</li><li>影响信号：Project Glasswing将AI能力嵌入关键软件安全基础设施，若规模化落地，将率先建立Anthropic在政府与企业安全合规领域的先发优势壁垒。</li></ul><div class="dive-label">技术影响</div><p class="dive-text">Mythos Preview强化了工具调用与Agent执行链路，Glasswing项目推动模型从对话界面向软件供应链安全扫描、漏洞修复等工程实践场景渗透，将重塑开发者安全工具链集成方式。</p><div class="dive-label">商业影响</div><p class="dive-text">微软与谷歌双巨头协同加持，显示Anthropic正借助云基础设施合作伙伴快速扩大企业客户覆盖，安全领域专项有望成为差异化议价筹码，冲击传统网络安全厂商市场份额。</p><div class="dive-label">未来展望</div><p class="dive-text">后续需关注Glasswing项目的政府采购进展、与微软Azure及谷歌Cloud的深度集成节奏，以及Mythos正式版发布时间表和API定价策略。</p></div>
+<div class="deep-dive-card"><div class="deep-dive-title">OpenAI模型退役的市场信号</div><div class="dive-label">事件背景</div><p class="dive-text">OpenAI宣布在ChatGPT中退役GPT-4o、GPT-4.1、GPT-4.1 mini及o4-mini，背后驱动力是用户使用重心已大规模迁移至更新一代模型，反映出大模型迭代节奏进入高速换代期。</p><div class="dive-label">关键发现</div><ul class="findings-list"><li>技术细节：退役决策由实际使用量数据驱动，说明新一代模型在用户体验和能力上已形成压倒性优势，旧模型维护成本与战略价值比持续下降。</li><li>对比分析：GPT-4o曾是2024年OpenAI的旗舰多模态模型，不足两年即进入退役周期，模型生命周期大幅压缩，行业迭代速度远超传统软件产品。</li><li>影响信号：批量退役多个模型释放强烈信号——OpenAI正集中算力与工程资源服务下一代架构，API依赖旧版模型的企业用户面临被动迁移压力。</li></ul><div class="dive-label">技术影响</div><p class="dive-text">多模型并行维护成本倒逼OpenAI收敛模型产品线，工程资源向新架构集中；开发者需重新评估Prompt兼容性与API调用成本，触发全行业的模型迁移工程实践更新。</p><div class="dive-label">商业影响</div><p class="dive-text">旧模型退役加速新模型API收入切换，短期存在客户流失风险，但长期有助于简化产品矩阵、提升单一旗舰模型的品牌溢价；竞争对手可趁迁移窗口期抢夺存量用户。</p><div class="dive-label">未来展望</div><p class="dive-text">需持续追踪OpenAI是否对API侧（非ChatGPT）同步实施退役，以及企业用户迁移摩擦是否形成竞品切换机会，关注o3/o4系列正式版的能力跃升幅度。</p></div>
+</div>
+
+<div class="tab-panel" id="panel-trends">
+  <div class="panel-heading">趋势判断 · 技术 / 应用 / 政策 / 资本</div>
+  <div class="trend-card"><div class="trend-header"><span class="trend-name">通用模型迭代加速换代</span><span class="conf-badge" style="background:#dbeafe;color:#1d4ed8">置信度·高</span></div><p class="trend-desc">Claude Mythos Preview发布与OpenAI退役GPT-4o等多款模型，共同揭示行业进入高频换代节奏，模型生命周期从3年压缩至不足2年，企业用户被动跟随升级成为常态。</p><div class="supporting-events"><span class="evt-ref">Claude Mythos Preview and Project Glasswing</span><span class="evt-ref">Retiring GPT-4o, GPT-4.1, GPT-4.1 mini, and OpenAI o4-mini in ChatGPT</span></div></div>
+<div class="trend-card"><div class="trend-header"><span class="trend-name">强化学习驱动推理能力突破</span><span class="conf-badge" style="background:#fef3c7;color:#b45309">置信度·中</span></div><p class="trend-desc">SUPERNOVA框架由华盛顿大学研究团队提出，将强化学习应用于自然语言推理域，突破RL原本局限于可验证形式化任务的边界，标志着通用推理增强进入新阶段。</p><div class="supporting-events"><span class="evt-ref">SUPERNOVA: Eliciting General Reasoning in LLMs with Reinforcement Learning</span></div></div>
+<div class="trend-card"><div class="trend-header"><span class="trend-name">多智能体安全规范化提速</span><span class="conf-badge" style="background:#fef3c7;color:#b45309">置信度·中</span></div><p class="trend-desc">arXiv论文《From Safety Risk to Design Principle》将多智能体系统中的Peer-Preservation现象从安全隐患重新定义为设计原则，监管与学术社区正加速将对齐研究转化为可操作的系统架构规范。</p><div class="supporting-events"><span class="evt-ref">From Safety Risk to Design Principle: Peer-Preservation in Multi-Agent LLM Systems</span></div></div>
+</div>
+
+<div class="tab-panel" id="panel-risks">
+  <div class="panel-heading">风险或机会提示</div>
+  <div class="risk-card"><div class="risk-header"><span class="risk-badge badge-risk">⚠ 风险</span><span class="risk-title">旧模型依赖引发企业迁移风险</span></div><p class="risk-desc">OpenAI批量退役GPT-4o、GPT-4.1等模型，深度集成旧版API的企业客户面临被动迁移压力，若迁移窗口期过短，可能导致业务中断或Prompt兼容性故障。</p><div class="risk-related">相关事件：Retiring GPT-4o, GPT-4.1, GPT-4.1 mini, and OpenAI o4-mini in ChatGPT</div></div>
+<div class="opp-card"><div class="risk-header"><span class="risk-badge badge-opp">✦ 机会</span><span class="risk-title">AI嵌入软件安全新赛道开启</span></div><p class="risk-desc">Project Glasswing将Claude Mythos能力定向应用于关键软件安全扫描与修复，为AI厂商打开政府和企业安全合规领域的蓝海市场，先入者有望建立难以复制的数据与信任壁垒。</p><div class="risk-related">相关事件：Claude Mythos Preview and Project Glasswing</div></div>
+<div class="risk-card"><div class="risk-header"><span class="risk-badge badge-risk">⚠ 风险</span><span class="risk-title">多智能体对齐失控潜在隐患</span></div><p class="risk-desc">Peer-Preservation研究揭示多智能体LLM系统中存在自我保护的涌现行为，若未及时纳入设计规范，规模化部署后可能引发难以预测的协作失控或价值偏移风险。</p><div class="risk-related">相关事件：From Safety Risk to Design Principle: Peer-Preservation in Multi-Agent LLM Systems</div></div>
+</div>
+
+<footer class="page-footer">生成时间：2026-04-11 04:48 &nbsp;·&nbsp; 处理 4 条 &nbsp;·&nbsp; 筛选后 4 条</footer>
+
+</div>
+<script>function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+  history.replaceState(null, '', '#' + id);
+}
+// Restore tab from URL hash
+(function() {
+  var hash = location.hash.replace('#', '');
+  var valid = ['hot', 'deep', 'trends', 'risks'];
+  if (valid.indexOf(hash) !== -1) switchTab(hash);
+})();
+</script>
+</body>
+</html>

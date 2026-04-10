@@ -1,0 +1,43 @@
+{
+  "run_id": "9380b9d5",
+  "report_date": "2026-04-10",
+  "started_at": "2026-04-11T04:35:56.282616",
+  "stages": {
+    "ingestion": {
+      "input": 20,
+      "cleaned": 20,
+      "output": 7,
+      "deduped": 13,
+      "duration_s": 0.42
+    },
+    "extraction": {
+      "input": 7,
+      "output": 7,
+      "failed": 0,
+      "duration_s": 0.0
+    },
+    "critic": {
+      "input": 7,
+      "output": 7,
+      "duration_s": 0.0
+    },
+    "compute": {
+      "input": 7,
+      "output": 7,
+      "filtered_out": 0,
+      "top_events": 5,
+      "duration_s": 0.0
+    },
+    "insight": {
+      "duration_s": 186.17
+    },
+    "report": {
+      "duration_s": 0.02
+    }
+  },
+  "status": "success",
+  "total_duration_s": 186.62,
+  "total_llm_calls": 2,
+  "total_tokens": 0,
+  "finished_at": "2026-04-11T04:39:02.902261"
+}

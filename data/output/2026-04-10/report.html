@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Insight Daily — 2026-04-10</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Serif SC', 'Georgia', serif;
+  background: #f8f8f6;
+  color: #1a1a1a;
+  line-height: 1.8;
+  font-size: 16px;
+  min-height: 100vh;
+}
+
+/* ── App shell ── */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Site header ── */
+.site-header {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 1.1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+}
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.brand-logo {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.brand-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.brand-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 0.1rem;
+}
+.header-meta {
+  text-align: right;
+}
+.date-chip {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fcd34d;
+  letter-spacing: 0.04em;
+}
+.stat-line {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: #64748b;
+  margin-top: 0.2rem;
+}
+
+/* ── Tab bar ── */
+.tab-bar {
+  background: #fff;
+  border-bottom: 1px solid #e5e5e0;
+  position: sticky;
+  top: 60px;
+  z-index: 100;
+  display: flex;
+  padding: 0 2rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 0.95rem 1.2rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.tab-btn:hover { color: #1a1a1a; }
+.tab-btn.active {
+  color: #1a1a1a;
+  border-bottom-color: #1a1a1a;
+}
+.tab-count {
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: #f0f0ec;
+  color: #888;
+  padding: 0.1rem 0.45rem;
+  border-radius: 10px;
+}
+.tab-btn.active .tab-count {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+/* ── Content panels ── */
+.tab-panel {
+  display: none;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+  width: 100%;
+}
+.tab-panel.active { display: block; }
+
+/* ── Executive summary (shown on hot-events tab) ── */
+.summary-block {
+  background: #fff;
+  border: 1px solid #e5e5e0;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.summary-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 0.6rem;
+}
+.summary-block p {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: #334155;
+}
+.summary-en {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #eee;
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+}
+
+/* ── Hot event article entry ── */
+.article-entry {
+  margin-bottom: 2.75rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #e0e0d8;
+}
+.article-entry:last-child { border-bottom: none; }
+
+.article-number {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #bbb;
+  margin-bottom: 0.4rem;
+}
+.article-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+.article-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  flex: 1;
+}
+.article-title a { color: inherit; text-decoration: none; }
+.article-title a:hover { text-decoration: underline; }
+.score-pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: #fff8e6;
+  border: 1px solid #f0d070;
+  color: #7a5c00;
+  padding: 0.28rem 0.6rem;
+  border-radius: 20px;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+.article-byline {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: #999;
+  margin-bottom: 0.95rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.8rem;
+  align-items: center;
+}
+.byline-cat {
+  display: inline-block;
+  padding: 0.12rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.article-summary {
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: #2a2a2a;
+  margin-bottom: 1.3rem;
+}
+.field-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 0.45rem;
+}
+.article-background {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #555;
+  background: #f7f7f3;
+  border-left: 3px solid #d0d0c8;
+  padding: 0.8rem 1rem;
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 1.1rem;
+}
+.ref-links { margin-bottom: 1.1rem; }
+.ref-links ul { list-style: none; padding: 0; margin: 0; }
+.ref-links ul li {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.83rem;
+  color: #3b6fa0;
+  padding: 0.18rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.ref-links ul li::before { content: '↗'; font-size: 0.72rem; opacity: 0.55; }
+.tags-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #666;
+  background: #efefea;
+  border: 1px solid #ddddd5;
+  padding: 0.18rem 0.5rem;
+  border-radius: 3px;
+}
+
+/* ── Category colors ── */
+.cat-技术突破 { background: #e8f0fe; color: #1a56c4; }
+.cat-产品发布 { background: #ede7f6; color: #5e35b1; }
+.cat-商业资本 { background: #e8f5e9; color: #2e7d32; }
+.cat-政策合规 { background: #fff3e0; color: #e65100; }
+
+/* ── Panel heading ── */
+.panel-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #e5e5e0;
+}
+
+/* ── Deep dive cards ── */
+.deep-dive-card {
+  background: #fff;
+  border: 1px solid #e5e5e0;
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+}
+.deep-dive-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.1rem;
+  color: #0f172a;
+  line-height: 1.4;
+}
+.dive-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 0.4rem;
+  margin-top: 1rem;
+}
+.dive-label:first-of-type { margin-top: 0; }
+.dive-text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #334155;
+}
+.findings-list {
+  padding-left: 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #334155;
+}
+.empty-tip {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  color: #bbb;
+  text-align: center;
+  padding: 3rem 0;
+}
+
+/* ── Trend cards ── */
+.trend-card {
+  border-left: 3px solid #3b82f6;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  background: #f8faff;
+  border-radius: 0 6px 6px 0;
+}
+.trend-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.55rem;
+  flex-wrap: wrap;
+}
+.trend-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+.conf-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.18rem 0.55rem;
+  border-radius: 4px;
+}
+.trend-desc {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #475569;
+  margin-bottom: 0.55rem;
+}
+.supporting-events {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: #aaa;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.6rem;
+}
+.evt-ref::before { content: '· '; }
+
+/* ── Risk / opportunity cards ── */
+.risk-card {
+  border-left: 3px solid #ef4444;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  background: #fff8f8;
+  border-radius: 0 6px 6px 0;
+}
+.opp-card {
+  border-left: 3px solid #10b981;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  background: #f0fdf4;
+  border-radius: 0 6px 6px 0;
+}
+.risk-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+.risk-badge {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.18rem 0.55rem;
+  border-radius: 4px;
+}
+.badge-risk { background: #fee2e2; color: #b91c1c; }
+.badge-opp  { background: #d1fae5; color: #065f46; }
+.risk-title { font-size: 1rem; font-weight: 700; color: #0f172a; }
+.risk-desc  {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+.risk-related {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: #aaa;
+}
+
+/* ── Footer ── */
+.page-footer {
+  background: #fff;
+  border-top: 1px solid #e5e5e0;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: #ccc;
+  text-align: center;
+  padding: 1.25rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .site-header { padding: 1rem 1rem; }
+  .tab-bar { padding: 0 0.5rem; }
+  .tab-btn { padding: 0.8rem 0.8rem; font-size: 0.8rem; }
+  .tab-panel { padding: 1.5rem 1rem 4rem; }
+  .article-header { flex-direction: column; gap: 0.4rem; }
+  .score-pill { align-self: flex-start; }
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<header class="site-header">
+  <div class="header-brand">
+    <div class="brand-logo">⚡</div>
+    <div>
+      <div class="brand-name">AI Insight Daily</div>
+      <div class="brand-sub">AI-curated daily digest</div>
+    </div>
+  </div>
+  <div class="header-meta">
+    <div class="date-chip">📅 2026-04-10</div>
+    <div class="stat-line">处理 7 条 · 精选 5 条 · 2026-04-11 04:39</div>
+  </div>
+</header>
+
+<nav class="tab-bar">
+  <button class="tab-btn active" id="tab-hot" onclick="switchTab('hot')">🔥 今日热点<span class="tab-count">5</span></button>
+  <button class="tab-btn" id="tab-deep" onclick="switchTab('deep')">🔍 深度总结<span class="tab-count">2</span></button>
+  <button class="tab-btn" id="tab-trends" onclick="switchTab('trends')">📈 趋势判断<span class="tab-count">3</span></button>
+  <button class="tab-btn" id="tab-risks" onclick="switchTab('risks')">⚡ 风险与机会<span class="tab-count">4</span></button>
+</nav>
+
+<div class="tab-panel active" id="panel-hot">
+  <div class="summary-block"><div class="summary-label">执行摘要</div><p>① 今日最核心事件：字节Seed与北大提出In-Place TTT，实现大模型推理时无需加层即可自动更新参数，同日阿里Wan2.7以68分优势登顶DesignArena全球视频编辑榜，标志中国AI产品竞争力全面跃升。② 结构性趋势：推理时自适应优化正替代单纯参数规模竞争成为新技术主轴；头部厂商超大规模参数军备竞赛（5T至10T量级）持续加速，算力集中化加剧。③ 核心机会：Wan2.7的国际榜单突破为国产视频AI商业化开辟全球窗口，但参数信息非正式泄露也警示行业竞争情报保护亟需加强。</p><p class="summary-en">Today&#x27;s most significant developments center on two breakthroughs: ByteDance Seed and Peking University&#x27;s In-Place TTT enables large models to dynamically update parameters at inference time without architectural changes, while Alibaba&#x27;s Wan2.7 topped the DesignArena global leaderboard with a commanding 68-point lead over Grok Imagine, signaling a structural shift in China&#x27;s global AI competitiveness. Two key trends dominate: inference-time adaptive optimization is emerging as the new frontier beyond brute-force parameter scaling, while the hyperscale parameter arms race—with Claude Opus at 5T and xAI&#x27;s largest model at 10T—continues to concentrate compute resources among a handful of players. The primary opportunity lies in Wan2.7&#x27;s commercial internationalization window, while Elon Musk&#x27;s inadvertent disclosure of Claude&#x27;s parameter scale highlights growing risks around competitive intelligence leakage at the frontier AI level.</p></div>
+  <div class="article-entry" id="article-1"><div class="article-number">No. 1</div><div class="article-header"><div class="article-title"><a href="https://aiera.com.cn/2026/04/10/other/aiera-com-cn/89410/" target="_blank">Meta发布Muse Spark</a></div><div class="score-pill">⭐ 9.0/10</div></div><div class="article-byline"><span class="byline-cat cat-商业资本">商业资本</span> &nbsp;·&nbsp; 新智元 &nbsp;·&nbsp; 2026-04-10</div><p class="article-summary">Meta MSL首作Muse Spark评分52分较上代暴增近3倍，股价涨近10%，已确立顶级模型竞争者地位。</p><div class="field-label">背景</div><div class="article-background">MSL：Meta专注AGI研究的超级智能实验室</div><div class="tags-row"><span class="tag">#Meta</span><span class="tag">#大模型竞争</span><span class="tag">#商业资本</span></div></div>
+<div class="article-entry" id="article-2"><div class="article-number">No. 2</div><div class="article-header"><div class="article-title"><a href="https://www.qbitai.com/2026/04/399370.html" target="_blank">阿里Wan2.7登顶视频榜</a></div><div class="score-pill">⭐ 9.0/10</div></div><div class="article-byline"><span class="byline-cat cat-产品发布">产品发布</span> &nbsp;·&nbsp; 量子位 &nbsp;·&nbsp; 2026-04-10</div><p class="article-summary">阿里Wan2.7以1334分登顶DesignArena，领先Grok达68分，彰显国产视频生成模型已具备全球竞争力。</p><div class="field-label">背景</div><div class="article-background">DesignArena：全球用户盲测投票的AI生成设计评测平台</div><div class="tags-row"><span class="tag">#AI视频生成</span><span class="tag">#阿里巴巴</span><span class="tag">#榜单</span></div></div>
+<div class="article-entry" id="article-3"><div class="article-number">No. 3</div><div class="article-header"><div class="article-title"><a href="https://www.qbitai.com/2026/04/398741.html" target="_blank">字节北大推出原地TTT</a></div><div class="score-pill">⭐ 9.0/10</div></div><div class="article-byline"><span class="byline-cat cat-技术突破">技术突破</span> &nbsp;·&nbsp; 量子位 &nbsp;·&nbsp; 2026-04-10</div><p class="article-summary">In-Place TTT复用现有MLP实现推理时参数自更新，无需新增网络层，有望成为大模型推理增强的轻量级通用新范式。</p><div class="field-label">背景</div><div class="article-background">测试时训练TTT：推理阶段动态自适应更新模型参数的技术</div><div class="tags-row"><span class="tag">#技术突破</span><span class="tag">#字节跳动</span><span class="tag">#大模型推理</span></div></div>
+<div class="article-entry" id="article-4"><div class="article-number">No. 4</div><div class="article-header"><div class="article-title"><a href="https://www.qbitai.com/2026/04/398420.html" target="_blank">马斯克泄露Claude参数</a></div><div class="score-pill">⭐ 8.0/10</div></div><div class="article-byline"><span class="byline-cat cat-产品发布">产品发布</span> &nbsp;·&nbsp; 量子位 &nbsp;·&nbsp; 2026-04-10</div><p class="article-summary">马斯克意外透露Claude Opus达5T参数，xAI同步训练10T参数巨模，AI参数军备竞赛正式迈入万亿量级新阶段。</p><div class="field-label">背景</div><div class="article-background">模型参数量：衡量大模型规模与能力上限的核心技术指标</div><div class="tags-row"><span class="tag">#Claude</span><span class="tag">#Anthropic</span><span class="tag">#参数规模</span></div></div>
+<div class="article-entry" id="article-5"><div class="article-number">No. 5</div><div class="article-header"><div class="article-title"><a href="https://github.com/HKUDS/DeepTutor" target="_blank">DeepTutor教育助手走红</a></div><div class="score-pill">⭐ 9.0/10</div></div><div class="article-byline"><span class="byline-cat cat-商业资本">商业资本</span> &nbsp;·&nbsp; GitHub Trending &nbsp;·&nbsp; 2026-04-10</div><p class="article-summary">港大DeepTutor单日GitHub涨星逾1400颗，以Agent原生架构切入教育赛道，AI个性化学习开源生态加速成熟。</p><div class="field-label">背景</div><div class="article-background">Agent-Native：AI智能体驱动的原生应用架构模式</div><div class="tags-row"><span class="tag">#AI教育</span><span class="tag">#开源项目</span><span class="tag">#GitHub</span></div></div>
+</div>
+
+<div class="tab-panel" id="panel-deep">
+  <div class="panel-heading">重要事件深度总结</div>
+  <div class="deep-dive-card"><div class="deep-dive-title">In-Place TTT：推理时自适应参数更新</div><div class="dive-label">事件背景</div><p class="dive-text">测试时训练（TTT）是近年来提升大模型长上下文推理能力的重要研究方向，但传统方案需要在模型中引入额外网络层或进行重训练，工程代价高昂，限制了大规模部署。</p><div class="dive-label">关键发现</div><ul class="findings-list"><li>技术细节：字节Seed与北京大学团队提出In-Place TTT，复用Transformer现有MLP模块作为快速权重，实现推理过程中参数自动更新，无需新增网络层或改变模型架构，显著降低部署门槛。</li><li>对比分析：在Llama3.1-8B和Qwen3-4B等主流开源模型上验证有效，相比传统TTT方法省去结构改造成本，与Meta、Google等依赖超大参数暴力扩展的路线形成技术分叉。</li><li>影响信号：该方案打开了&#x27;以推理换性能&#x27;的新思路，若规模化验证通过，将推动业界从模型规模竞争转向推理效率竞争，对算力受限的中小机构尤具战略价值。</li></ul><div class="dive-label">技术影响</div><p class="dive-text">In-Place TTT为无重训练的动态参数适应提供了可行路径，对Transformer架构工程实践产生直接影响，有望成为长上下文和多跳推理任务的标准组件，并推动开发者工具链向推理时自适应方向演进。</p><div class="dive-label">商业影响</div><p class="dive-text">该技术降低了高性能模型的推理成本门槛，有利于中小企业及开源社区在不依赖超大算力的前提下追赶头部模型，同时对Llama、Qwen生态的商业化落地构成积极催化。</p><div class="dive-label">未来展望</div><p class="dive-text">后续需关注该方法在更大参数量级（70B+）及多模态场景的泛化表现，以及字节是否将其整合进商业产品；若开源，将加速全行业验证与采用。</p></div>
+<div class="deep-dive-card"><div class="deep-dive-title">Wan2.7登顶DesignArena的战略意义</div><div class="dive-label">事件背景</div><p class="dive-text">视频生成是多模态AI竞争的核心战场，DesignArena作为基于全球用户真实投票的评测平台，代表市场实际偏好而非实验室指标，其排名具有较高可信度与商业参考价值。</p><div class="dive-label">关键发现</div><ul class="findings-list"><li>技术细节：阿里Wan2.7以1334 Elo评分登顶DesignArena视频编辑榜单，领先第二名Grok Imagine达68分，差距显著，且评分来源于全球用户盲测投票，排除了厂商自测偏差。</li><li>对比分析：Grok Imagine背靠xAI超算Colossus的庞大算力支撑，Wan2.7在此前提下仍能以近70分差距领先，表明阿里在视频编辑算法与模型训练策略上具备独立的技术优势。</li><li>影响信号：中国AI厂商首次在国际权威用户偏好榜单上全面超越美国竞品，标志着视频生成领域的全球竞争格局正在重塑，并为阿里云及相关API商业化提供强力信用背书。</li></ul><div class="dive-label">技术影响</div><p class="dive-text">Wan2.7的胜出表明视频编辑任务中精细时序控制和用户交互反馈优化已成关键技术壁垒，将推动业界加大对视频编辑专项模型的研发投入，并影响多模态训练数据与RLHF策略的设计取向。</p><div class="dive-label">商业影响</div><p class="dive-text">登顶DesignArena将直接拉动阿里云视频AI服务的企业采购需求，同时对Adobe、Runway等西方视频AI SaaS企业形成市场压力；国内创意设计类应用开发者有望加速接入Wan2.7 API。</p><div class="dive-label">未来展望</div><p class="dive-text">关注阿里是否借此窗口期加速Wan2.7的API商业化和海外市场拓展，以及Grok Imagine和Sora是否会推出针对性更新以追回差距。</p></div>
+</div>
+
+<div class="tab-panel" id="panel-trends">
+  <div class="panel-heading">趋势判断 · 技术 / 应用 / 政策 / 资本</div>
+  <div class="trend-card"><div class="trend-header"><span class="trend-name">推理时自适应优化崛起</span><span class="conf-badge" style="background:#dbeafe;color:#1d4ed8">置信度·高</span></div><p class="trend-desc">字节Seed&amp;北大提出的In-Place TTT标志着&#x27;推理时参数更新&#x27;进入实用化阶段，行业竞争轴正从单纯的参数规模扩展转向推理效率与动态适应能力，低成本高性能成为新赛点。</p><div class="supporting-events"><span class="evt-ref">大模型能「原地」改参数了！字节Seed&amp;北大新论文：测试时推理无需加层重训练</span></div></div>
+<div class="trend-card"><div class="trend-header"><span class="trend-name">中国AI全球竞争力跃升</span><span class="conf-badge" style="background:#dbeafe;color:#1d4ed8">置信度·高</span></div><p class="trend-desc">阿里Wan2.7以68分优势领先Grok Imagine登顶DesignArena，显示中国AI产品在国际用户偏好评测中已具备超越美国头部产品的实力，视频生成赛道率先出现结构性反转信号。</p><div class="supporting-events"><span class="evt-ref">阿里视频生成大模型Wan2.7登顶DesignArena榜单</span></div></div>
+<div class="trend-card"><div class="trend-header"><span class="trend-name">超大规模参数军备竞赛加速</span><span class="conf-badge" style="background:#dbeafe;color:#1d4ed8">置信度·高</span></div><p class="trend-desc">马斯克意外披露Claude Opus参数达5万亿、xAI最大模型达10万亿，Meta Muse Spark性能从18分跃升至52分，显示头部玩家正以超大规模参数和超级算力作为核心竞争壁垒，资本与算力投入持续加码。</p><div class="supporting-events"><span class="evt-ref">马斯克说漏嘴了！Claude Opus参数5T，Sonnet 1T</span><span class="evt-ref">Meta超级智能实验室发布Muse Spark，硬刚GPT-5.4</span></div></div>
+</div>
+
+<div class="tab-panel" id="panel-risks">
+  <div class="panel-heading">风险或机会提示</div>
+  <div class="risk-card"><div class="risk-header"><span class="risk-badge badge-risk">⚠ 风险</span><span class="risk-title">参数规模泄露引发安全隐患</span></div><p class="risk-desc">马斯克社交媒体意外披露Claude Opus 5T参数规模，暴露顶级AI公司核心技术参数被非正式渠道泄漏的风险，可能影响Anthropic竞争策略并引发行业信息安全管理的连锁审视。</p><div class="risk-related">相关事件：马斯克说漏嘴了！Claude Opus参数5T，Sonnet 1T</div></div>
+<div class="risk-card"><div class="risk-header"><span class="risk-badge badge-risk">⚠ 风险</span><span class="risk-title">超大参数算力成本集中化风险</span></div><p class="risk-desc">Claude Opus 5T、xAI 10T参数模型及Meta Muse Spark等超大规模竞赛，将算力资源高度集中于少数超级玩家，中小机构面临被边缘化风险，行业马太效应加剧。</p><div class="risk-related">相关事件：马斯克说漏嘴了！Claude Opus参数5T，Sonnet 1T、Meta超级智能实验室发布Muse Spark，硬刚GPT-5.4</div></div>
+<div class="opp-card"><div class="risk-header"><span class="risk-badge badge-opp">✦ 机会</span><span class="risk-title">视频AI国产替代加速窗口</span></div><p class="risk-desc">Wan2.7登顶DesignArena全球榜单，为国内创意设计、影视制作、广告营销等行业提供了高性价比的视频AI替代方案，是阿里云加速国际商业化的关键时间窗口。</p><div class="risk-related">相关事件：阿里视频生成大模型Wan2.7登顶DesignArena榜单</div></div>
+<div class="opp-card"><div class="risk-header"><span class="risk-badge badge-opp">✦ 机会</span><span class="risk-title">Agent原生教育应用蓝海</span></div><p class="risk-desc">DeepTutor在GitHub单日获得1426颗星，验证了Agent-Native个性化学习助手赛道的强烈市场需求，为教育科技创业者和开源开发者提供了高热度的切入机会。</p><div class="risk-related">相关事件：HKUDS/DeepTutor: Agent-Native Personalized Learning Assistant</div></div>
+</div>
+
+<footer class="page-footer">生成时间：2026-04-11 04:39 &nbsp;·&nbsp; 处理 7 条 &nbsp;·&nbsp; 筛选后 7 条</footer>
+
+</div>
+<script>function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+  history.replaceState(null, '', '#' + id);
+}
+// Restore tab from URL hash
+(function() {
+  var hash = location.hash.replace('#', '');
+  var valid = ['hot', 'deep', 'trends', 'risks'];
+  if (valid.indexOf(hash) !== -1) switchTab(hash);
+})();
+</script>
+</body>
+</html>
