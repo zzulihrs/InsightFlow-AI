@@ -2,7 +2,7 @@
 .env
 
 # Documentation (design docs)
-docx/
+docs/
 
 # Python
 __pycache__/
@@ -31,5 +31,5 @@ Thumbs.db
 # Claude
 .claude/
 
-# Pipeline output (optional - uncomment to track)
-# data/output/
+# Pipeline output (generated, not tracked)
+data/output/

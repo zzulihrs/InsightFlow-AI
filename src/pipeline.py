@@ -38,30 +38,35 @@ def _load_report_rules() -> ReportRule:
 
 
 async def run_pipeline(report_date: str | None = None) -> dict:
-    """Run the full 6-stage pipeline"""
-    if report_date is None:
-        report_date = date.today().isoformat()
+    """Run the full 6-stage pipeline.
+
+    report_date: YYYY-MM-DD string.
+      - If None: auto-detected as the latest published_at date in the data.
+      - If given: only articles with published_at <= that date are processed.
+    """
+    # Defer date resolution until after ingestion so we can inspect article dates.
+    user_specified_date = report_date
 
     run_id = str(uuid.uuid4())[:8]
-    pipeline_log = {
-        "run_id": run_id,
-        "report_date": report_date,
-        "started_at": datetime.now().isoformat(),
-        "stages": {},
-        "status": "running",
-    }
-
-    logger.info(f"=== Pipeline Start | date={report_date} | run_id={run_id} ===")
+    logger.info(f"=== Pipeline Start | run_id={run_id} ===")
 
     # Load configs
     source_weights = _load_source_weights()
     rules = _load_report_rules()
 
-    # Initialize LLM client and prompt manager
-    client = ClaudeClient()
+    client = ClaudeClient(max_concurrency=3)
     prompt_mgr = PromptManager()
 
     total_start = time.time()
+
+    # Minimal log in case of early failure (date resolved after ingestion)
+    pipeline_log: dict = {
+        "run_id": run_id,
+        "report_date": user_specified_date or "unknown",
+        "started_at": datetime.now().isoformat(),
+        "stages": {},
+        "status": "running",
+    }
 
     try:
         # Stage 1: Ingestion
@@ -70,6 +75,32 @@ async def run_pipeline(report_date: str | None = None) -> dict:
         raw_articles = load_raw_articles()
         cleaned = clean_articles(raw_articles)
         unique = deduplicate(cleaned)
+
+        if not unique:
+            raise RuntimeError("No articles after ingestion")
+
+        # Resolve report_date from article data (honest date labeling)
+        if user_specified_date is None:
+            # Use the latest published_at date in the dataset
+            report_date = max(
+                a.published_at.date() for a in unique
+            ).isoformat()
+            logger.info(f"  Auto-detected report date: {report_date}")
+        else:
+            # Filter to articles published on or before the specified date
+            cutoff = date.fromisoformat(user_specified_date)
+            unique = [a for a in unique if a.published_at.date() <= cutoff]
+            report_date = user_specified_date
+            if not unique:
+                raise RuntimeError(
+                    f"No articles with published_at <= {report_date} in dataset"
+                )
+            logger.info(f"  Using specified date {report_date}, kept {len(unique)} articles")
+
+        # Update log with resolved date
+        pipeline_log["report_date"] = report_date
+        logger.info(f"  date={report_date} | Ingested: {len(raw_articles)} -> cleaned: {len(cleaned)} -> unique: {len(unique)}")
+
         pipeline_log["stages"]["ingestion"] = {
             "input": len(raw_articles),
             "cleaned": len(cleaned),
@@ -77,10 +108,6 @@ async def run_pipeline(report_date: str | None = None) -> dict:
             "deduped": len(cleaned) - len(unique),
             "duration_s": round(time.time() - stage_start, 2),
         }
-        logger.info(f"  Ingested: {len(raw_articles)} -> cleaned: {len(cleaned)} -> unique: {len(unique)}")
-
-        if not unique:
-            raise RuntimeError("No articles after ingestion")
 
         # Stage 2: Extraction
         stage_start = time.time()

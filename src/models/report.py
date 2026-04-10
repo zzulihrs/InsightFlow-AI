@@ -12,8 +12,11 @@ class HotEvent(BaseModel):
     title: str
     impact_score: int
     category: ArticleCategory
-    summary: str = Field(description="一句话概要")
+    summary: str = Field(description="2-3句话概要，说明发生了什么及重要意义")
     source_url: str
+    background: str = Field(default="", description="背景说明，解释相关技术术语和上下文")
+    tags: list[str] = Field(default_factory=list, description="话题标签列表，如 #AI #LLM")
+    reference_links: list[str] = Field(default_factory=list, description="相关参考资源描述列表")
 
 
 class DeepDive(BaseModel):

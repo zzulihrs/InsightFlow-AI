@@ -9,7 +9,7 @@ from src.models.article import RawArticle
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
-DEFAULT_DATA_PATH = PROJECT_ROOT / "data" / "raw" / "raw_news.json"
+DEFAULT_DATA_PATH = PROJECT_ROOT / "data" / "input" / "raw_news.json"
 
 
 def load_raw_articles(data_path: str | Path = None) -> list[RawArticle]:

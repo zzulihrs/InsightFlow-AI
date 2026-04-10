@@ -94,6 +94,16 @@ def save_daily_output(
     # 更新索引
     _update_index(report_date, report)
 
+    # report.html — self-contained browser report
+    try:
+        from src.storage.html_generator import save_report_html
+        report_dict  = json.loads(report_path.read_text(encoding="utf-8"))
+        scored_dicts = json.loads(scored_path.read_text(encoding="utf-8"))
+        html_path = save_report_html(report_date, report_dict, scored_dicts)
+        logger.debug(f"Wrote {html_path}")
+    except Exception as e:
+        logger.warning(f"HTML generation failed (non-fatal): {e}")
+
     logger.info(f"Daily output saved successfully for {report_date}")
 
 
@@ -155,12 +165,28 @@ def _generate_markdown(report: DailyReport) -> str:
         lines.append("## Hot Events")
         lines.append("")
         for event in report.hot_events:
-            score_badge = f"[{event.impact_score}/10]"
-            lines.append(f"{event.rank}. **{event.title}** {score_badge}")
-            lines.append(f"   - {event.summary}")
-            lines.append(f"   - Category: {event.category}")
-            if event.source_url:
-                lines.append(f"   - Source: {event.source_url}")
+            score_badge = f"[⭐ {event.impact_score}.0/10]"
+            url_part = f" — [{event.source_url}]({event.source_url})" if event.source_url else ""
+            lines.append(f"### {event.rank}. {event.title} {score_badge}")
+            lines.append("")
+            lines.append(f"**分类：** {event.category}{url_part}")
+            lines.append("")
+            lines.append(event.summary)
+            lines.append("")
+            if event.background:
+                lines.append("**背景：**")
+                lines.append("")
+                lines.append(event.background)
+                lines.append("")
+            if event.reference_links:
+                lines.append("**参考资源：**")
+                for ref in event.reference_links:
+                    lines.append(f"- {ref}")
+                lines.append("")
+            if event.tags:
+                lines.append(" ".join(event.tags))
+                lines.append("")
+            lines.append("---")
             lines.append("")
 
     # Deep Dives

@@ -17,12 +17,13 @@ def main():
 
     try:
         result = asyncio.run(run_pipeline(args.date))
+        html_path = f"data/output/{result['report_date']}/report.html"
         print(f"\n{'='*50}")
         print(f"Pipeline completed successfully!")
-        print(f"Date: {result['report_date']}")
-        print(f"Duration: {result['total_duration_s']}s")
+        print(f"Date:      {result['report_date']}")
+        print(f"Duration:  {result['total_duration_s']}s")
         print(f"LLM calls: {result['total_llm_calls']}")
-        print(f"Status: {result['status']}")
+        print(f"HTML View: {html_path}")
         print(f"{'='*50}")
     except Exception as e:
         logger.error(f"Pipeline failed: {e}")

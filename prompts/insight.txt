@@ -28,11 +28,14 @@
   "hot_events": [
     {{
       "rank": 1,
-      "title": "事件标题",
-      "impact_score": 9,
+      "title": "事件标题（简洁客观，去除标题党色彩，20字以内）",
+      "impact_score": 8,
       "category": "技术突破",
-      "summary": "一句话概要 (50字以内)",
-      "source_url": "原文链接"
+      "summary": "2-3句话说明事件经过、核心数据和重要意义。第一句说明'谁做了什么'，第二句给出关键细节或数据，第三句解释为什么这件事值得关注、会带来什么改变。（100-150字）",
+      "source_url": "原文链接",
+      "background": "为不熟悉该领域的读者解释相关技术背景、术语定义和相关组织。用简洁的句子逐条说明，例如：XXX是...；YYY指的是...（60-100字）",
+      "tags": ["#AI", "#LLM", "#OpenAI"],
+      "reference_links": ["相关技术论文或资源标题1", "相关组织或项目名称2", "相关背景资料标题3"]
     }}
   ],
   "deep_dives": [
@@ -67,6 +70,10 @@
 
 # Constraints
 - hot_events 数量 = {top_k}
+- 每条 hot_event 的 summary 必须是2-3句完整的分析性句子，不能只是一句话复述标题
+- 每条 hot_event 的 background 必须解释读者可能不熟悉的专业术语或背景信息
+- 每条 hot_event 的 tags 包含3-5个相关话题标签，以 # 开头
+- 每条 hot_event 的 reference_links 包含2-4条相关资源的文字描述（无需真实URL，只需描述性标题）
 - deep_dives 只选最重要的 1-2 个事件
 - trend_insights 至少 1 条，最多 3 条
 - 所有分析必须有数据支撑，引用具体事件名称

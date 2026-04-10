@@ -65,6 +65,7 @@ def _build_fallback_report(
     """LLM 生成失败时，从 context 构建一份最小可用报告"""
     hot_events: list[HotEvent] = []
     for rank, article in enumerate(context.top_events, start=1):
+        cat_str = article.category.value if hasattr(article.category, "value") else str(article.category)
         hot_events.append(
             HotEvent(
                 rank=rank,
@@ -73,6 +74,9 @@ def _build_fallback_report(
                 category=article.category,
                 summary=article.structured_analysis.key_action,
                 source_url=article.original_url,
+                background=article.structured_analysis.background,
+                tags=[f"#{cat_str}"] + [f"#{e}" for e in article.core_entities[:3]],
+                reference_links=[],
             )
         )
 
