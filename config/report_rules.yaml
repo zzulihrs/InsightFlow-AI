@@ -1,0 +1,29 @@
+profile_name: "Developer_Daily_Brief"
+
+audience_persona:
+  role: "资深后端工程师与 AI Agent 开发者"
+  tone: "客观、极客、直击痛点，拒绝营销话术"
+  focus_domain:
+    - "技术突破"
+    - "开源框架"
+    - "模型微调"
+    - "API降价"
+
+data_filter_rules:
+  top_k: 5
+  min_impact_score: 7
+  exclude_categories: []
+
+module_configs:
+  hot_events:
+    enabled: true
+    format: "bullet_points"
+    require_tech_details: true
+  trend_insight:
+    enabled: true
+    format: "bullet_points"
+    require_tech_details: true
+  risk_and_opportunity:
+    enabled: true
+    format: "bullet_points"
+    require_tech_details: true

@@ -1,0 +1,72 @@
+sources:
+  - name: "OpenAI Blog"
+    type: static
+    description: "OpenAI official blog"
+    url: "https://openai.com/blog"
+    category: "official"
+    weight: 1.5
+    parser_strategy: full_text
+    tags: ["openai", "official", "en"]
+
+  - name: "Anthropic Blog"
+    type: static
+    description: "Anthropic official blog"
+    url: "https://www.anthropic.com/news"
+    category: "official"
+    weight: 1.5
+    parser_strategy: full_text
+    tags: ["anthropic", "official", "en"]
+
+  - name: "GitHub Trending"
+    type: static
+    description: "GitHub daily trending AI repositories"
+    url: "https://github.com/trending"
+    category: "community"
+    weight: 1.2
+    parser_strategy: full_text
+    tags: ["github", "opensource", "en"]
+
+  - name: "HackerNews"
+    type: static
+    description: "HackerNews AI discussions"
+    url: "https://news.ycombinator.com"
+    category: "community"
+    weight: 1.0
+    parser_strategy: full_text
+    tags: ["hackernews", "community", "en"]
+
+  - name: "arXiv"
+    type: static
+    description: "arXiv AI/ML latest research"
+    url: "https://arxiv.org/list/cs.AI/recent"
+    category: "academic"
+    weight: 1.2
+    parser_strategy: summary_only
+    tags: ["arxiv", "academic", "en"]
+
+  - name: "量子位"
+    type: static
+    description: "量子位 AI 垂直媒体"
+    url: "https://www.qbitai.com"
+    category: "media_zh"
+    weight: 1.3
+    parser_strategy: full_text
+    tags: ["量子位", "媒体", "zh"]
+
+  - name: "新智元"
+    type: static
+    description: "新智元 AI 垂直媒体"
+    url: "https://www.xinzhiyuan.com"
+    category: "media_zh"
+    weight: 1.3
+    parser_strategy: full_text
+    tags: ["新智元", "媒体", "zh"]
+
+  - name: "知乎"
+    type: static
+    description: "知乎 AI 热榜讨论"
+    url: "https://www.zhihu.com"
+    category: "community_zh"
+    weight: 0.9
+    parser_strategy: full_text
+    tags: ["知乎", "社区", "zh"]
