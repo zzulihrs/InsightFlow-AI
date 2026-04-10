@@ -1,4 +1,9 @@
-"""Phase 7 — Insight Generation: 调用 LLM 生成日报分析"""
+"""Phase 5 — Insight Generation
+
+使用两次独立的 LLM 调用，避免单次大 JSON 响应超出代理超时限制：
+  Call 1 (insight_hot.txt)      → 生成 hot_events（带背景/标签/参考链接）
+  Call 2 (insight_analysis.txt) → 生成 deep_dives / trend_insights / risks / executive_summary
+"""
 
 import json
 from datetime import datetime
@@ -11,61 +16,72 @@ from src.llm.client import ClaudeClient
 from src.llm.prompts import PromptManager
 
 SYSTEM_PROMPT = (
-    "你是一位在硅谷拥有十年经验的 AI 技术分析师。"
-    "请严格按照指示输出合法 JSON。"
+    "你是一位在硅谷拥有十年经验的 AI 技术分析师，精通中英双语。"
+    "请严格按照指示输出合法 JSON，不要添加任何前言后语。"
 )
 
 
+# ── Serializers ───────────────────────────────────────────────────────────────
+
 def _serialize_top_events(top_events: list[ScoredArticle]) -> str:
-    """将 top_events 序列化为 JSON 字符串"""
-    return json.dumps(
-        [a.model_dump(mode="json") for a in top_events],
-        ensure_ascii=False,
-        indent=2,
-    )
+    """精简序列化 — 只保留 LLM 所需核心字段，降低 token 消耗。"""
+    slim = []
+    for a in top_events:
+        cat = a.category.value if hasattr(a.category, "value") else str(a.category)
+        slim.append({
+            "title":         a.title,
+            "category":      cat,
+            "impact_score":  a.impact_score,
+            "source_name":   a.source_name,
+            "original_url":  a.original_url,
+            "core_entities": a.core_entities[:4],
+            "background":    a.structured_analysis.background,
+            "key_action":    a.structured_analysis.key_action,
+            "tech_impact":   a.structured_analysis.technical_implication[:80],
+            "trend_insight": (a.trend_insight or "")[:60],
+        })
+    return json.dumps(slim, ensure_ascii=False, indent=2)
 
 
-def _serialize_clusters(clusters: dict[str, list[ScoredArticle]]) -> str:
-    """将 clusters 序列化为精简 JSON — 只保留关键字段以节省 token"""
-    compact: dict[str, list[dict]] = {}
-    for category, articles in clusters.items():
-        compact[category] = [
-            {
-                "title": a.title,
-                "impact_score": a.impact_score,
-                "category": a.category.value if hasattr(a.category, "value") else str(a.category),
-                "core_entities": a.core_entities,
-            }
-            for a in articles
-        ]
-    return json.dumps(compact, ensure_ascii=False, indent=2)
+def _top_events_brief(top_events: list[ScoredArticle]) -> str:
+    """仅含标题、分类、评分的极简列表，用于 analysis call。"""
+    lines = []
+    for i, a in enumerate(top_events, 1):
+        cat = a.category.value if hasattr(a.category, "value") else str(a.category)
+        lines.append(f"{i}. [{cat}·{a.impact_score}分] {a.title}")
+    return "\n".join(lines)
+
+
+def _clusters_brief(clusters: dict[str, list[ScoredArticle]]) -> str:
+    """各分类的事件计数，极简格式。"""
+    parts = [f"{cat}: {len(arts)}条" for cat, arts in clusters.items()]
+    return " | ".join(parts)
 
 
 def _serialize_entity_frequency(entity_frequency: list[tuple[str, int]]) -> str:
-    """将 entity_frequency 序列化为 JSON 字符串"""
-    return json.dumps(entity_frequency, ensure_ascii=False)
+    return json.dumps(entity_frequency[:8], ensure_ascii=False)
 
 
-def _strip_code_blocks(text: str) -> str:
-    """去除 LLM 响应中可能包裹的 markdown 代码块标记"""
+def _strip_json(text: str) -> str:
     text = text.strip()
-    if text.startswith("```json"):
-        text = text[7:]
-    elif text.startswith("```"):
-        text = text[3:]
+    for prefix in ("```json", "```"):
+        if text.startswith(prefix):
+            text = text[len(prefix):]
     if text.endswith("```"):
         text = text[:-3]
     return text.strip()
 
 
-def _build_fallback_report(
-    context: FilteredContext,
-    report_date: str,
-) -> DailyReport:
-    """LLM 生成失败时，从 context 构建一份最小可用报告"""
+# ── Fallback ──────────────────────────────────────────────────────────────────
+
+def _build_fallback_report(context: FilteredContext, report_date: str) -> DailyReport:
     hot_events: list[HotEvent] = []
     for rank, article in enumerate(context.top_events, start=1):
-        cat_str = article.category.value if hasattr(article.category, "value") else str(article.category)
+        cat_str = (
+            article.category.value
+            if hasattr(article.category, "value")
+            else str(article.category)
+        )
         hot_events.append(
             HotEvent(
                 rank=rank,
@@ -79,7 +95,6 @@ def _build_fallback_report(
                 reference_links=[],
             )
         )
-
     return DailyReport(
         report_date=report_date,
         generated_at=datetime.now(),
@@ -89,10 +104,12 @@ def _build_fallback_report(
         deep_dives=[],
         trend_insights=[],
         risks_and_opportunities=[],
-        executive_summary_zh="[自动生成失败，以下为基于评分的热点事件列表]",
-        executive_summary_en="[Auto-generation failed. Below is a score-based hot event list.]",
+        executive_summary_zh="",
+        executive_summary_en="",
     )
 
+
+# ── Main ──────────────────────────────────────────────────────────────────────
 
 async def generate_insights(
     context: FilteredContext,
@@ -102,92 +119,103 @@ async def generate_insights(
     min_score: int = 7,
     top_k: int = 5,
 ) -> DailyReport:
-    """调用 Claude 生成日报洞察分析，失败时回退为最小报告。
+    """两步 LLM 生成：Call 1 → hot_events；Call 2 → deep_dives/trends/risks/summary。"""
 
-    Parameters
-    ----------
-    context : FilteredContext
-        Compute 层输出的过滤 / 聚类上下文。
-    client : ClaudeClient
-        已初始化的 Claude 客户端。
-    prompt_mgr : PromptManager
-        Prompt 模板管理器。
-    report_date : str
-        报告日期，格式 YYYY-MM-DD。
-    min_score : int
-        过滤阈值 (仅用于渲染 prompt，不做实际过滤)。
-    top_k : int
-        Top K 事件数量。
-
-    Returns
-    -------
-    DailyReport
-    """
-    # ── 1. 序列化上下文数据 ──────────────────────────────────
-    top_events_json = _serialize_top_events(context.top_events)
-    clusters_json = _serialize_clusters(context.clusters)
-    entity_frequency_json = _serialize_entity_frequency(context.entity_frequency)
-
-    # ── 2. 渲染 prompt ──────────────────────────────────────
-    user_content = prompt_mgr.render(
-        "insight",
-        total_processed=context.total_before_filter,
-        total_filtered=context.total_after_filter,
-        min_score=min_score,
-        report_date=report_date,
-        top_k=top_k,
-        top_events_json=top_events_json,
-        clusters_json=clusters_json,
-        entity_frequency_json=entity_frequency_json,
-    )
+    top_events_json   = _serialize_top_events(context.top_events)
+    top_brief         = _top_events_brief(context.top_events)
+    clusters_brief    = _clusters_brief(context.clusters)
+    entity_freq_json  = _serialize_entity_frequency(context.entity_frequency)
 
     logger.info(
         f"Generating insights for {report_date} | "
-        f"top_events={len(context.top_events)}, "
-        f"clusters={len(context.clusters)}, "
-        f"prompt_length={len(user_content)}"
+        f"top_events={len(context.top_events)}, clusters={len(context.clusters)}"
     )
 
-    # ── 3. 调用 LLM ─────────────────────────────────────────
+    # ── Call 1: hot events ────────────────────────────────────────────────────
+    # Use actual article count to avoid asking LLM for more items than available
+    effective_top_k = min(top_k, len(context.top_events))
+    hot_events: list[HotEvent] = []
     try:
-        raw_response = await client.call(
-            system_prompt=SYSTEM_PROMPT,
-            user_content=user_content,
-            max_tokens=4096,
+        prompt_hot = prompt_mgr.render(
+            "insight_hot",
+            top_k=effective_top_k,
+            top_events_json=top_events_json,
         )
+        logger.info(f"  Call 1 (hot_events) | prompt={len(prompt_hot)} chars")
+        raw1 = await client.call(SYSTEM_PROMPT, prompt_hot, max_retries=1)
+        cleaned1 = _strip_json(raw1)
 
-        # ── 4. 解析 JSON ────────────────────────────────────
-        cleaned = _strip_code_blocks(raw_response)
-        parsed = json.loads(cleaned)
-        logger.debug(f"LLM response parsed successfully, keys={list(parsed.keys())}")
+        # Parse: accept array [ ] or {"hot_events": [...]}
+        try:
+            items = json.loads(cleaned1)
+        except json.JSONDecodeError:
+            # Attempt to extract from partial response
+            from src.llm.client import _extract_json
+            cleaned1 = _extract_json(cleaned1)
+            items = json.loads(cleaned1)
 
-        # ── 5. 构建 DailyReport ─────────────────────────────
-        report = DailyReport(
-            report_date=report_date,
-            generated_at=datetime.now(),
-            total_articles_processed=context.total_before_filter,
-            total_articles_after_filter=context.total_after_filter,
-            hot_events=parsed.get("hot_events", []),
-            deep_dives=parsed.get("deep_dives", []),
-            trend_insights=parsed.get("trend_insights", []),
-            risks_and_opportunities=parsed.get("risks_and_opportunities", []),
-            executive_summary_zh=parsed.get("executive_summary_zh", ""),
-            executive_summary_en=parsed.get("executive_summary_en", ""),
-        )
+        if isinstance(items, dict):
+            items = items.get("hot_events", [])
+        hot_events = items
+        logger.info(f"  Call 1 OK | {len(hot_events)} hot events")
 
-        logger.info(
-            f"Insight generation complete | "
-            f"hot_events={len(report.hot_events)}, "
-            f"deep_dives={len(report.deep_dives)}, "
-            f"trend_insights={len(report.trend_insights)}"
-        )
-        return report
-
-    except json.JSONDecodeError as e:
-        logger.error(f"Failed to parse LLM response as JSON: {e}")
-        logger.debug(f"Raw response (first 500 chars): {raw_response[:500]}")
-        return _build_fallback_report(context, report_date)
+        if len(hot_events) == 0:
+            logger.warning("Call 1 returned 0 hot events — using structured fallback")
+            hot_events = _build_fallback_report(context, report_date).hot_events
 
     except Exception as e:
-        logger.error(f"Insight generation failed: {e}")
+        logger.error(f"Call 1 (hot_events) failed: {e}")
         return _build_fallback_report(context, report_date)
+
+    # ── Call 2: analysis (deep_dives / trends / risks / summary) ────────────────
+    deep_dives: list = []
+    trend_insights: list = []
+    risks_and_opportunities: list = []
+    executive_summary_zh = ""
+    executive_summary_en = ""
+    try:
+        prompt_analysis = prompt_mgr.render(
+            "insight_analysis",
+            report_date=report_date,
+            total_processed=context.total_before_filter,
+            total_filtered=context.total_after_filter,
+            top_events_json=top_events_json,
+            clusters_brief=clusters_brief,
+            entity_frequency_json=entity_freq_json,
+        )
+        logger.info(f"  Call 2 (analysis) | prompt={len(prompt_analysis)} chars")
+        raw2 = await client.call(SYSTEM_PROMPT, prompt_analysis, max_retries=1)
+        parsed2 = json.loads(_strip_json(raw2))
+        deep_dives              = parsed2.get("deep_dives", [])
+        trend_insights          = parsed2.get("trend_insights", [])
+        risks_and_opportunities = parsed2.get("risks_and_opportunities", [])
+        executive_summary_zh    = parsed2.get("executive_summary_zh", "")
+        executive_summary_en    = parsed2.get("executive_summary_en", "")
+        logger.info(
+            f"  Call 2 OK | {len(deep_dives)} deep_dives, "
+            f"{len(trend_insights)} trends, "
+            f"{len(risks_and_opportunities)} risks"
+        )
+    except Exception as e:
+        logger.warning(f"Call 2 (analysis) failed (non-fatal): {e}")
+        # Analysis failure is non-fatal — hot events are already generated
+
+    report = DailyReport(
+        report_date=report_date,
+        generated_at=datetime.now(),
+        total_articles_processed=context.total_before_filter,
+        total_articles_after_filter=context.total_after_filter,
+        hot_events=hot_events,
+        deep_dives=deep_dives,
+        trend_insights=trend_insights,
+        risks_and_opportunities=risks_and_opportunities,
+        executive_summary_zh=executive_summary_zh,
+        executive_summary_en=executive_summary_en,
+    )
+
+    logger.info(
+        f"Insight generation complete | "
+        f"hot={len(hot_events)}, trends={len(trend_insights)}, "
+        f"risks={len(risks_and_opportunities)}"
+    )
+    return report

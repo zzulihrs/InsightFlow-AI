@@ -1,0 +1,27 @@
+# Task
+为以下 {top_k} 条高分 AI 资讯各生成一条热点摘要，输出合法 JSON 数组（不要 markdown 包裹）。
+
+# 今日高分事件
+{top_events_json}
+
+# Output — JSON Array
+[
+  {{
+    "rank": 1,
+    "title": "精简标题（15字以内）",
+    "impact_score": 10,
+    "category": "技术突破",
+    "summary": "1-2句分析：说明谁做了什么、为什么值得关注（60字以内）",
+    "source_url": "原文链接（保持原值不变）",
+    "background": "解释1个关键术语（30字以内）",
+    "tags": ["#AI", "#OpenAI"],
+    "reference_links": []
+  }}
+]
+
+# 约束
+- 严格输出 JSON 数组，数组长度 = {top_k}
+- 所有文本字段用中文，source_url 保持英文原值
+- summary 必须包含分析性判断，禁止只复述标题
+- tags 2-3 个，以 # 开头
+- reference_links 留空数组 []

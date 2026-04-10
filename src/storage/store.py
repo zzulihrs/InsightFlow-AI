@@ -142,6 +142,60 @@ def list_available_dates() -> list[str]:
 # Internal helpers
 # ─────────────────────────────────────────────────────────────
 
+def save_summary_output(
+    start_date: str,
+    end_date: str,
+    report: DailyReport,
+) -> Path:
+    """将多日汇总报告持久化到磁盘。
+
+    复用 DailyReport 结构，存入 summary_{start}_{end}/ 子目录。
+
+    Parameters
+    ----------
+    start_date : str
+        汇总起始日期 YYYY-MM-DD。
+    end_date : str
+        汇总结束日期 YYYY-MM-DD。
+    report : DailyReport
+        汇总报告（report_date 已设为 "start ~ end" 格式）。
+
+    Returns
+    -------
+    Path
+        保存目录路径。
+    """
+    dir_name = f"summary_{start_date}_{end_date}"
+    summary_dir = DATA_DIR / dir_name
+    summary_dir.mkdir(parents=True, exist_ok=True)
+    logger.info(f"Saving summary output to {summary_dir}")
+
+    # report.json
+    report_path = summary_dir / "report.json"
+    report_path.write_text(
+        json.dumps(report.model_dump(mode="json"), ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    logger.debug(f"Wrote {report_path}")
+
+    # report.html — 复用现有 HTML 生成器，period_label 已在 report_date 字段
+    try:
+        from src.storage.html_generator import save_report_html
+        report_dict = json.loads(report_path.read_text(encoding="utf-8"))
+        html_path = save_report_html(
+            report.report_date,
+            report_dict,
+            [],           # scored 列表为空，汇总模式不需要 scored_map
+            out_dir=summary_dir,
+        )
+        logger.debug(f"Wrote {html_path}")
+    except Exception as e:
+        logger.warning(f"Summary HTML generation failed (non-fatal): {e}")
+
+    logger.info(f"Summary output saved for {start_date} ~ {end_date}")
+    return summary_dir
+
+
 def _generate_markdown(report: DailyReport) -> str:
     """将 DailyReport 转为可读的 Markdown 文本。"""
     lines: list[str] = []
