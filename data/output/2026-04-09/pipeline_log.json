@@ -1,20 +1,20 @@
 {
-  "run_id": "8ff6f883",
+  "run_id": "07c500ce",
   "report_date": "2026-04-09",
-  "started_at": "2026-04-11T04:46:41.860834",
+  "started_at": "2026-04-11T14:26:47.536818",
   "stages": {
     "ingestion": {
       "input": 19,
       "cleaned": 19,
       "output": 4,
       "deduped": 15,
-      "duration_s": 0.42
+      "duration_s": 0.82
     },
     "extraction": {
       "input": 4,
       "output": 4,
       "failed": 0,
-      "duration_s": 0.0
+      "duration_s": 0.01
     },
     "critic": {
       "input": 4,
@@ -29,15 +29,15 @@
       "duration_s": 0.0
     },
     "insight": {
-      "duration_s": 88.86
+      "duration_s": 111.0
     },
     "report": {
-      "duration_s": 0.02
+      "duration_s": 0.06
     }
   },
   "status": "success",
-  "total_duration_s": 89.31,
+  "total_duration_s": 111.89,
   "total_llm_calls": 2,
   "total_tokens": 0,
-  "finished_at": "2026-04-11T04:48:11.170181"
+  "finished_at": "2026-04-11T14:28:39.427032"
 }
