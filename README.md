@@ -71,25 +71,21 @@ data/output/<date>/
 - `report.html`
 - `pipeline_log.json`
 
-## 查看方式
+## 在线预览
 
-当前项目以 HTML 报告为主，可直接在浏览器中打开：
+已部署至 [insightflow-ai.surge.sh](https://insightflow-ai.surge.sh)，可直接打开：
 
-```text
-data/output/2026-04-11/report.html
-```
+| 日期 | 链接 |
+|------|------|
+| 报告目录 | https://insightflow-ai.surge.sh |
+| 2026-04-10 | https://insightflow-ai.surge.sh/data/output/2026-04-10/report.html |
+| 2026-04-09 | https://insightflow-ai.surge.sh/data/output/2026-04-09/report.html |
 
 ## 效果展示
 
 以下截图来自项目已生成的 HTML 日报页面，便于直接了解最终展示效果：
 
 ![HTML 日报效果截图](assets/screenshots/report-demo.png)
-
-对应示例文件可查看：
-
-```text
-data/output/2026-04-10/report.html
-```
 
 ## 说明文档
 
