@@ -1,5 +1,7 @@
 # InsightFlow-AI
 
+**在线预览：https://insightflow-ai.surge.sh/**
+
 InsightFlow-AI 是一个面向 AI 行业资讯的分析日报项目。系统从多来源新闻中读取数据，完成结构化抽取、多维评分、过滤聚类和日报生成，最终输出 HTML 结果文件。
 
 ## 项目内容
