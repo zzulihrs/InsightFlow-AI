@@ -1,7 +1,7 @@
 # Introducing GPT-5.4
 
 **Source:** OpenAI Blog
-**Date:** March 5, 2026
+**Date:** April 8, 2026
 **Original URL:** <https://openai.com/index/introducing-gpt-5-4/>
 
 ---

@@ -1,7 +1,7 @@
 # Retiring GPT-4o, GPT-4.1, GPT-4.1 mini, and OpenAI o4-mini in ChatGPT
 
 **Source:** OpenAI Blog
-**Date:** January 29, 2026
+**Date:** April 9, 2026
 **Original URL:** https://openai.com/index/retiring-gpt-4o-and-older-models/
 
 ---

@@ -1,7 +1,7 @@
 # Anthropic's Model Context Protocol Hits 97 Million Installs on March 25 -- MCP Transitions from Experimental to Foundation Layer for Agentic AI
 
 **Source:** Artur Markus  
-**Date:** March 30, 2026  
+**Date:** April 2, 2026  
 **Original URL:** https://www.arturmarkus.com/anthropics-model-context-protocol-hits-97-million-installs-on-march-25-mcp-transitions-from-experimental-to-foundation-layer-for-agentic-ai/
 
 ---

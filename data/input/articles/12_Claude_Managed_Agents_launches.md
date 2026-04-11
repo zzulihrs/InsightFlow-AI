@@ -1,7 +1,7 @@
 # Claude Managed Agents Overview
 
 **Source:** Anthropic Platform Documentation
-**Date:** 2026-04-11
+**Date:** 2026-04-08
 **Original URL:** https://platform.claude.com/docs/en/managed-agents/overview
 
 ---
