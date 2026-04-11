@@ -72,7 +72,7 @@
     "title": "深度讨论2026年AI预测：最关键的下注点在哪？",
     "content": "知乎组织了2026 AI Best Ideas社群讨论，AI研究人员、创业者、产品经理和投资人围绕三大核心议题展开深入讨论。第一，AI公司竞争格局：OpenAI、Anthropic、Google三强鼎立，但开源阵营（DeepSeek、Llama）正在快速缩小差距，关键变量是推理成本的下降速度。第二，AI应用与智能体形态：2026年将是Agent元年，从单一对话式AI转向多Agent协作、长时任务执行和自主决策，企业级Agent平台将成为最大赛道。第三，算力与基础设施瓶颈：训练算力见顶后，推理算力需求爆发式增长，推理芯片和边缘计算成为新的投资热点。社群共识认为，2026年AI投资的最大机会在应用层而非基础模型层。",
     "url": "https://www.huxiu.com/article/4820860.html",
-    "published_at": "2026-04-9T14:00:00+08:00",
+    "published_at": "2026-04-09T14:00:00+08:00",
     "language": "zh",
     "source_weight": 0.9
   },
@@ -182,17 +182,17 @@
     "title": "OpenAI backs Illinois SB 3444: AI liability bill shields labs from 'critical harms' lawsuits",
     "content": "OpenAI publicly supports Illinois state bill SB 3444, which shields AI labs from liability for critical harms caused by frontier models. The bill defines frontier models as those trained with over $100 million in computational costs. Under the proposed legislation, AI labs would be required to publish safety reports but would gain legal protection from direct liability claims related to model outputs. The bill has sparked heated debate, with critics arguing it creates a dangerous precedent for corporate immunity while supporters say regulatory clarity is necessary for continued AI development. The discussion touches on broader themes of AI governance, the balance between innovation and accountability, and whether computational cost is an appropriate threshold for regulatory classification.",
     "url": "https://www.techbuzz.ai/articles/openai-pushes-illinois-bill-shielding-ai-labs-from-liability",
-    "published_at": "2026-04-08T18:00:00Z",
+    "published_at": "2026-04-09T18:00:00Z",
     "language": "en",
     "source_weight": 1.0
   },
   {
     "id": "news_18",
-    "source_name": "HackerNews",
+    "source_name": "Anthropic Blog",
     "source_type": "static",
     "title": "Anthropic ups compute deal with Google and Broadcom amid skyrocketing demand",
     "content": "Anthropic announced an expansion of its partnership with Google and Broadcom for multiple gigawatts of next-generation compute. A recent Broadcom SEC filing shows the deal includes 3.5 gigawatts of compute capacity, the majority housed in the U.S. as part of Anthropic's $50 billion commitment to invest in U.S. compute infrastructure. Anthropic CFO Krishna Rao stated this partnership is a continuation of their disciplined approach to scaling infrastructure, building capacity necessary to serve exponential growth in their customer base while enabling Claude to define the frontier of AI development. The deal represents Anthropic's most significant compute commitment to date, driven by unprecedented demand for Claude models from enterprise customers, despite the U.S. Defense Department's labeling of Anthropic as a supply-chain risk.",
-    "url": "https://techcrunch.com/2026/04/07/anthropic-compute-deal-google-broadcom-tpus/",
+    "url": "https://www.anthropic.com/news/google-broadcom-partnership-compute",
     "published_at": "2026-04-07T14:00:00Z",
     "language": "en",
     "source_weight": 1.0
